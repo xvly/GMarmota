@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="dw495dl0" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="o47n0" name="Background_DaTi1.png" path="/" scale="" scale9grid="76,49,157,100"/>
+    <image id="o47n1" name="Misc_RedProp.png" path="/"/>
+    <image id="o47n2" name="Misc_ReSkillBG.png" path="/"/>
+    <image id="o47n3" name="Star04.png" path="/"/>
+    <image id="o47n4" name="Star09.png" path="/"/>
+    <image id="o47n5" name="Star10.png" path="/"/>
+    <image id="o47n6" name="Star11.png" path="/"/>
+    <image id="o47n7" name="Task_Guide.png" path="/"/>
+    <image id="o47n8" name="TipsBtn.png" path="/"/>
+    <image id="o47n9" name="TipsBtn2.png" path="/"/>
+    <component id="o47na" name="Component1.xml" path="/"/>
+  </resources>
+  <publish name="Package1"/>
+</packageDescription>

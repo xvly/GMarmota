@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,400">
+  <displayList>
+    <image id="n0_o47n" name="n0" src="o47n0" xy="34,2"/>
+    <text id="n1_o47n" name="n1" xy="128,67" size="131,64" fontSize="12" color="#ffffff" autoSize="none" text="test"/>
+  </displayList>
+  <transition name="t0"/>
+</component>
