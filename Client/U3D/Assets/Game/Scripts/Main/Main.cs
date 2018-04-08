@@ -95,8 +95,8 @@ public class Main : MonoBehaviour {
 
     IEnumerator StartGame()
     {
-        AssetManager.InitAssetLoader();
-        AssetManager.LoadObject<UnityEngine.Object>("assetBundle", "asset");
+        AssetManager.SetupSimulateLoader();
+        AssetManager.LoadObject<UnityEngine.Object>("lua/main", "main");
 
         // setup asset manager
         // var waitMainfest = AssetManager.LoadLocalManifest("AssetBundle");

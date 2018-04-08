@@ -7,9 +7,14 @@ namespace GStd.Asset{
 	{
 		private static IAssetLoader assetLoader;
 
-		public static void InitAssetLoader()
+		public static void SetupSimulateLoader()
 		{
 			assetLoader = new AssetLoaderSimulate();
+		}
+
+		public static void SetupABLoader()
+		{
+			assetLoader = new AssetLoaderAB();
 		}
 
 		public static T LoadObject<T>(string assetBundleName, string assetName) where T:UnityEngine.Object
