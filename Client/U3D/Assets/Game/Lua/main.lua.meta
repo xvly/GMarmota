@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 860aceeab46a3c742b8ad9ccee9c21d6
-timeCreated: 1521280245
-licenseType: Free
 DefaultImporter:
   externalObjects: {}
   userData: 
-  assetBundleName: 
+  assetBundleName: lua/main
   assetBundleVariant: 

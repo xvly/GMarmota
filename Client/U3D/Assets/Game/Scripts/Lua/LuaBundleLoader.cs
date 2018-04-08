@@ -41,41 +41,41 @@ public class LuaBundleLoader : LuaFileUtils
     public void SetupLoadTable()
     {
 #if UNITY_EDITOR
-        if (AssetManager.Simulator.SimulateAssetBundle)
-        {
-            return;
-        }
+        // if (AssetManager.Simulator.SimulateAssetBundle)
+        // {
+        //     return;
+        // }
 #endif
 
-        var manifest = AssetManager.Manifest;
-        if (manifest == null)
-        {
-            Debug.LogError("SetupLoadTable failed: no asset bundle manifest.");
-            return;
-        }
+        // var manifest = AssetManager.Manifest;
+        // if (manifest == null)
+        // {
+        //     Debug.LogError("SetupLoadTable failed: no asset bundle manifest.");
+        //     return;
+        // }
 
-        this.lookup.Clear();
-        var bundles = manifest.GetAllAssetBundles();
-        Assert.IsNotNull(bundles);
-        foreach (var bundle in bundles)
-        {
-            if (bundle.StartsWith(AssetBundlePrefix))
-            {
-                var assetBundle = AssetManager.LoadBundleLocal(bundle);
-                if (assetBundle == null)
-                {
-                    Debug.LogWarningFormat(
-                        "The bundle {0} is not existed.", bundle);
-                    continue;
-                }
+        // this.lookup.Clear();
+        // var bundles = manifest.GetAllAssetBundles();
+        // Assert.IsNotNull(bundles);
+        // foreach (var bundle in bundles)
+        // {
+        //     if (bundle.StartsWith(AssetBundlePrefix))
+        //     {
+        //         var assetBundle = AssetManager.LoadBundleLocal(bundle);
+        //         if (assetBundle == null)
+        //         {
+        //             Debug.LogWarningFormat(
+        //                 "The bundle {0} is not existed.", bundle);
+        //             continue;
+        //         }
 
-                var assetNames = assetBundle.GetAllAssetNames();
-                foreach (var assetName in assetNames)
-                {
-                    this.lookup.Add(assetName, bundle);
-                }
-            }
-        }
+        //         var assetNames = assetBundle.GetAllAssetNames();
+        //         foreach (var assetName in assetNames)
+        //         {
+        //             this.lookup.Add(assetName, bundle);
+        //         }
+        //     }
+        // }
     }
 
     /// <summary>
@@ -89,10 +89,10 @@ public class LuaBundleLoader : LuaFileUtils
             bundles.Add(kv.Value);
         }
 
-        foreach (var b in bundles)
-        {
-            AssetManager.UnloadAsseBundle(b);
-        }
+        // foreach (var b in bundles)
+        // {
+        //     AssetManager.UnloadAsseBundle(b);
+        // }
     }
 
     /// <inheritdoc/>
@@ -128,19 +128,21 @@ public class LuaBundleLoader : LuaFileUtils
             return null;
         }
 
-        var textAsset = AssetManager.LoadObjectLocal(
-            bundleName, filePath, typeof(TextAsset)) as TextAsset;
-        if (textAsset == null)
-        {
-            Debug.LogErrorFormat(
-                "Load lua file failed: {0}, can not load asset fomr bundle.",
-                fileName);
-            return null;
-        }
+        // var textAsset = AssetManager.LoadObjectLocal(
+        //     bundleName, filePath, typeof(TextAsset)) as TextAsset;
+        // if (textAsset == null)
+        // {
+        //     Debug.LogErrorFormat(
+        //         "Load lua file failed: {0}, can not load asset fomr bundle.",
+        //         fileName);
+        //     return null;
+        // }
 
-        var buffer = textAsset.bytes;
-        Resources.UnloadAsset(textAsset);
-        AssetManager.UnloadAsseBundle(bundleName);
-        return buffer;
+        // var buffer = textAsset.bytes;
+        // Resources.UnloadAsset(textAsset);
+        // AssetManager.UnloadAsseBundle(bundleName);
+        // return buffer;
+
+        return null;
     }
 }
