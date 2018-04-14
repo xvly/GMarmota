@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 551380951
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: uis/views/init
+      Dependencies: {}
+    Info_1:
+      Name: uis/independentimages/loading_0
+      Dependencies: {}
+    Info_2:
+      Name: uis/independentimages/loading_0_1
+      Dependencies: {}

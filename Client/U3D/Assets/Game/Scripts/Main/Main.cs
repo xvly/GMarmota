@@ -12,8 +12,6 @@ public class Main : MonoBehaviour {
 
     private void Awake()
     {
-        Debug.Log("main start");
-
         Instance = this;
         GameObject.DontDestroyOnLoad(this.gameObject);
 
@@ -95,8 +93,9 @@ public class Main : MonoBehaviour {
 
     IEnumerator StartGame()
     {
+        #if UNITY_EDITOR
         AssetManager.SetupSimulateLoader();
-        AssetManager.LoadObject<UnityEngine.Object>("lua/main", "main");
+        #endif
 
         // setup asset manager
         // var waitMainfest = AssetManager.LoadLocalManifest("AssetBundle");
@@ -111,45 +110,43 @@ public class Main : MonoBehaviour {
         // AssetManager.IgnoreHashCheck = true;
 
 //         // 构造Lua脚本加载器.
-//         this.luaLoader = new LuaBundleLoader();
-//         this.luaLoader.SetupLoadTable();
+        this.luaLoader = new LuaBundleLoader();
+        // this.luaLoader.SetupLoadTable();
 
 //         // 初始化Lua虚拟机.
-//         this.luaState = new LuaState();
-//         this.luaState.Start();
-//         this.luaState.OpenLibs(LuaDLL.luaopen_struct);
-// #if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
-//         luaState.OpenLibs(LuaDLL.luaopen_bit);
-// #endif
-//         this.OpenLuaSocket();
-//         this.OpenCJson();
+        this.luaState = new LuaState();
+        this.luaState.Start();
+        this.luaState.OpenLibs(LuaDLL.luaopen_struct);
+#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+        luaState.OpenLibs(LuaDLL.luaopen_bit);
+#endif
+        this.OpenLuaSocket();
+        this.OpenCJson();
 
-//         LuaBinder.Bind(this.luaState);
-//         DelegateFactory.Init();
-//         LuaCoroutine.Register(this.luaState, this);
-//         LuaLog.OpenLibs(this.luaState);
+        LuaBinder.Bind(this.luaState);
+        DelegateFactory.Init();
+        LuaCoroutine.Register(this.luaState, this);
+        LuaLog.OpenLibs(this.luaState);
 
-//         // 执行启动文件.
-//         try
-//         {
-//             this.luaState.LuaPushBoolean(Debug.isDebugBuild);
-//             this.luaState.LuaSetField(LuaIndexes.LUA_GLOBALSINDEX, "is_debug_build");
-//             this.luaState.LuaPop(1);
+        // 执行启动文件.
+        try
+        {
+            this.luaState.LuaPushBoolean(Debug.isDebugBuild);
+            this.luaState.LuaSetField(LuaIndexes.LUA_GLOBALSINDEX, "is_debug_build");
+            this.luaState.LuaPop(1);
 
-//             this.luaState.DoFile("main.lua");
+            this.luaState.DoFile("main.lua");
 
-//             this.luaUpdate = this.luaState.GetFunction("GameUpdate");
-//             this.luaStop = this.luaState.GetFunction("GameStop");
-//         }
-//         catch (LuaException exp)
-//         {
-//             Debug.LogError(exp.Message);
-//         }
+            this.luaUpdate = this.luaState.GetFunction("GameUpdate");
+            this.luaStop = this.luaState.GetFunction("GameStop");
+        }
+        catch (LuaException exp)
+        {
+            Debug.LogError(exp.Message);
+        }
 
 
-//         this.isRunning = true;
-
-        // setup lua
+        this.isRunning = true;
 
         yield return null;
     }

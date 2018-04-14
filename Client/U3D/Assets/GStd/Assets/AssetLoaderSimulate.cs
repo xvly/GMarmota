@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
 namespace GStd.Asset{
-	public class AssetLoaderSimulate : IAssetLoader {
-		public T LoadObject<T>(string assetBundleName, string assetName) where T:UnityEngine.Object
+	public class AssetLoaderSimulate : AssetLoader {
+		public override T LoadObject<T>(string assetBundleName, string assetName)
 		{
 			var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(assetBundleName, assetName);
 			if (assetPaths.Length == 0)
@@ -18,3 +19,5 @@ namespace GStd.Asset{
 		}		
 	}
 }
+
+#endif

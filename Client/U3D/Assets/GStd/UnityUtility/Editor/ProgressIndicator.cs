@@ -9,11 +9,7 @@
 		private int total = 1;
 
 		private int count;
-
-		private double progress = 0.03;
-
-		private double time;
-
+        
 		public ProgressIndicator(string title, int total)
         {
             this.title = title;

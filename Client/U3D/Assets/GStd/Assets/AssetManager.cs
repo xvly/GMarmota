@@ -5,12 +5,14 @@ using UnityEngine;
 namespace GStd.Asset{
 	public static class AssetManager
 	{
-		private static IAssetLoader assetLoader;
+		private static AssetLoader assetLoader;
 
+		#if UNITY_EDITOR
 		public static void SetupSimulateLoader()
 		{
 			assetLoader = new AssetLoaderSimulate();
 		}
+		#endif
 
 		public static void SetupABLoader()
 		{
@@ -25,6 +27,11 @@ namespace GStd.Asset{
 		public static bool IsAssetBundleCache(string assetBundleName)
 		{
 			return false;	
+		}
+
+		public static void UnloadAssetBundle(string assetBundleName)
+		{
+
 		}
 	}
 }

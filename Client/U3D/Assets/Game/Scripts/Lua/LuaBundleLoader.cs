@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using GStd;
+using GStd.Asset;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -128,21 +129,21 @@ public class LuaBundleLoader : LuaFileUtils
             return null;
         }
 
+        var textAsset = AssetManager.LoadObject<TextAsset>(bundleName, filePath);        
+
         // var textAsset = AssetManager.LoadObjectLocal(
         //     bundleName, filePath, typeof(TextAsset)) as TextAsset;
-        // if (textAsset == null)
-        // {
-        //     Debug.LogErrorFormat(
-        //         "Load lua file failed: {0}, can not load asset fomr bundle.",
-        //         fileName);
-        //     return null;
-        // }
+        if (textAsset == null)
+        {
+            Debug.LogErrorFormat(
+                "Load lua file failed: {0}, can not load asset fomr bundle.",
+                fileName);
+            return null;
+        }
 
-        // var buffer = textAsset.bytes;
-        // Resources.UnloadAsset(textAsset);
+        var buffer = textAsset.bytes;
+        Resources.UnloadAsset(textAsset);
         // AssetManager.UnloadAsseBundle(bundleName);
-        // return buffer;
-
-        return null;
+        return buffer;
     }
 }
