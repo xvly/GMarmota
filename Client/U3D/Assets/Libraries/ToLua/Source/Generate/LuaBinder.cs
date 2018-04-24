@@ -68,6 +68,11 @@ public static class LuaBinder
 		L.RegFunction("PCMSetPositionCallback", UnityEngine_AudioClip_PCMSetPositionCallback);
 		L.EndModule();
 		L.EndModule();
+		L.BeginModule("GStd");
+		L.BeginModule("Asset");
+		GStd_Asset_AssetManagerWrap.Register(L);
+		L.EndModule();
+		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);
 		L.RegFunction("Predicate_int", System_Predicate_int);

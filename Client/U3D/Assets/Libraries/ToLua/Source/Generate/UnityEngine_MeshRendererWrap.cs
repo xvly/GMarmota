@@ -85,8 +85,8 @@ public class UnityEngine_MeshRendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.MeshRenderer obj = (UnityEngine.MeshRenderer)o;
-			// int ret = obj.subMeshStartIndex;
-			// LuaDLL.lua_pushinteger(L, ret);
+			int ret = obj.subMeshStartIndex;
+			LuaDLL.lua_pushinteger(L, ret);
 			return 1;
 		}
 		catch(Exception e)

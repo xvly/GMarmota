@@ -329,17 +329,17 @@ public class UnityEngine_RenderTextureWrap
 
 			if (count == 2)
 			{
-				// UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-				// UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
-				// obj.ConvertToEquirect(arg0);
+				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+				obj.ConvertToEquirect(arg0);
 				return 0;
 			}
 			else if (count == 3)
 			{
-				// UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-				// UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
-				// UnityEngine.Camera.MonoOrStereoscopicEye arg1 = (UnityEngine.Camera.MonoOrStereoscopicEye)ToLua.CheckObject(L, 3, typeof(UnityEngine.Camera.MonoOrStereoscopicEye));
-				// obj.ConvertToEquirect(arg0, arg1);
+				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+				UnityEngine.Camera.MonoOrStereoscopicEye arg1 = (UnityEngine.Camera.MonoOrStereoscopicEye)ToLua.CheckObject(L, 3, typeof(UnityEngine.Camera.MonoOrStereoscopicEye));
+				obj.ConvertToEquirect(arg0, arg1);
 				return 0;
 			}
 			else

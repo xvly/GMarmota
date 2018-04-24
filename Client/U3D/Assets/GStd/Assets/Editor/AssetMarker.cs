@@ -75,8 +75,8 @@ namespace GStd.Editor.Asset{
             if (ret.EndsWith("/"))
                 ret += "__foundation";
 
-            if (!ret.EndsWith(".ab"))
-                ret += ".ab";
+            // if (!ret.EndsWith(".ab"))
+            //     ret += ".ab";
             return ret.ToLower();
         }
 
@@ -121,7 +121,7 @@ namespace GStd.Editor.Asset{
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
 
-                if (!this.IsNeedMark(path))
+                if (path == selfPath || !this.IsNeedMark(path))
                     continue;
 
                 var dir = this.GetDirFromPath(path);

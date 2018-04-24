@@ -6,7 +6,7 @@ using System.Text;
 using UnityEditor.ProjectWindowCallback;
 using System.Text.RegularExpressions;
 
-public class Test
+public class LuaCreateer
 {
     [MenuItem("Assets/Create/Lua Script", false, 80)]
     public static void CreatNewLua()
@@ -15,7 +15,7 @@ public class Test
         ScriptableObject.CreateInstance<MyDoCreateScriptAsset>(),
         GetSelectedPathOrFallback() + "/New Lua.lua",
         null,
-       "Assets/Game/Lua/template/template.lua");
+       "Assets/Game/Lua/Template/Template.lua");
     }
 
     public static string GetSelectedPathOrFallback()
@@ -36,8 +36,6 @@ public class Test
 
 class MyDoCreateScriptAsset : EndNameEditAction
 {
-
-
     public override void Action(int instanceId, string pathName, string resourceFile)
     {
         UnityEngine.Object o = CreateScriptAssetFromTemplate(pathName, resourceFile);

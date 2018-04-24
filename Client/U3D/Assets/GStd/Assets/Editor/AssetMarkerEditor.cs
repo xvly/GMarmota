@@ -86,11 +86,13 @@ namespace GStd.Editor.Asset
         public static void BundleMarkAll()
         {
             FindAssetMarkers();
-            
+
+            List<AssetMarker> list = new List<AssetMarker>();
             foreach(var kv in assetMarkers)
-            {
-                kv.Value.MarkAll();   
-            }
+                list.Add(kv.Value);
+                
+            foreach(var marker in list)
+                marker.MarkAll();
         }
 
         [MenuItem("Assets/GStd/Bundle/Clear All")]
@@ -101,6 +103,13 @@ namespace GStd.Editor.Asset
                 AssetDatabase.RemoveAssetBundleName(ab, true);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+
+        [MenuItem("Assets/GStd/Bundle/Remark all")]
+        public static void BundleRemarkAll()
+        {
+            BundleClearAll();
+            BundleMarkAll();
         }
 
         [MenuItem("Assets/GStd/Bundle/Clear folder")]

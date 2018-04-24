@@ -24,6 +24,11 @@ namespace GStd.Asset{
 			return assetLoader.LoadObject<T>(assetBundleName, assetName);
 		}
 
+		public static UnityEngine.Object LoadObject(string assetBundleName, string assetName, System.Type type)
+		{
+			return assetLoader.LoadObject(assetBundleName, assetName, type);
+		}
+
 		public static bool IsAssetBundleCache(string assetBundleName)
 		{
 			return false;	

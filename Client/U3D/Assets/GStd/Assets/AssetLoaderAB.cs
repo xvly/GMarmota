@@ -10,6 +10,12 @@ namespace GStd.Asset
 			Debug.Log("!! AssetLoaderAB loadobject");
 			return null;
 		}		
+
+		public override Object LoadObject(string assetBundleName, string assetName, System.Type type) 
+		{
+			Debug.Log("!! AssetLoaderAB loadobject");
+			return null;
+		}		
 	}
 
 }

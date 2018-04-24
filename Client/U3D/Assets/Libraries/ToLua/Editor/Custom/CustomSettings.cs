@@ -146,6 +146,10 @@ public static class CustomSettings
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),     
         _GT(typeof(LuaProfiler)),
+
+        _GT(typeof(UnityEngine.RectTransform)),
+
+        _GT(typeof(GStd.Asset.AssetManager)),
     };
 
     public static List<Type> dynamicList = new List<Type>()
