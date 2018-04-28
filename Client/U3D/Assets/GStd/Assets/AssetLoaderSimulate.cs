@@ -11,7 +11,7 @@ namespace GStd.Asset{
 			var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(assetBundleName, assetName);
 			if (assetPaths.Length == 0)
 			{
-				Debug.LogError(string.Format("simulate assetBundle:{0} asset:{1} failed", assetBundleName, assetName));
+				Debug.LogError(string.Format("simulate assetBundle:\"{0}\" asset:\"{1}\" failed", assetBundleName, assetName));
 				return null;
 			}
 			else

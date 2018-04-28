@@ -1,199 +1,146 @@
-﻿//------------------------------------------------------------------------------
-// This file is part of MistLand project in GStd.
-// Copyright © 2016-2016 GStd Technology Co., Ltd.
+﻿//-----------------------------------------------------------------------------
+// Copyright (c) 2018-2018 Nirvana Technology Co. Ltd.
 // All Right Reserved.
-//------------------------------------------------------------------------------
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+// Proprietary and confidential.
+//-----------------------------------------------------------------------------
 
 using GStd.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
-/// The custom editor for shader: "Game/Particle".
+/// The custom editor for shader: "Game/Water".
 /// </summary>
-public class GameWaterShaderGUI : GStdShaderGUI
+public sealed class GameWaterShaderGUI : GStdShaderGUI
 {
-    private MaterialProperty mainTex;
-    private MaterialProperty normalMap;
-    private MaterialProperty heightMap;
-
-    private MaterialProperty waterSpeed;
-    private MaterialProperty wavex1y1x2y2;
-    private MaterialProperty waveSmallx1y1x2y2;
-
-    private MaterialProperty waterColor1;
-    private MaterialProperty waterColor2;
-
-    private MaterialProperty ambianceColor;
-    private MaterialProperty diffuseColor;
-    private MaterialProperty specularColor;
+    private MaterialProperty waveScale;
+    private MaterialProperty waveSpeed;
+    private MaterialProperty bumpMap;
+    private MaterialProperty reflectiveColor;
 
     private MaterialProperty refractionDistort;
     private MaterialProperty refractionOpacity;
 
-    private MaterialProperty reflection;
-    private MaterialProperty reflectionSpace;
-    private MaterialProperty reflectPower;
+    private MaterialProperty waveTex;
+    private MaterialProperty waveDistort;
+
+    private MaterialProperty specularDir;
+    private MaterialProperty specularPow;
 
     /// <inheritdoc/>
     protected override void FindProperties(MaterialProperty[] props)
     {
-        this.mainTex = ShaderGUI.FindProperty("_MainTex", props);
-        this.normalMap = ShaderGUI.FindProperty("_NormalMap", props);
-        this.heightMap = ShaderGUI.FindProperty("_HeightMap", props);
+        this.waveScale = ShaderGUI.FindProperty(
+            "_WaveScale", props);
+        this.waveSpeed = ShaderGUI.FindProperty(
+            "_WaveSpeed", props);
+        this.bumpMap = ShaderGUI.FindProperty(
+            "_BumpMap", props);
+        this.reflectiveColor = ShaderGUI.FindProperty(
+            "_ReflectiveColor", props);
 
-        this.waterSpeed = ShaderGUI.FindProperty("_WaterSpeed", props);
-        this.wavex1y1x2y2 = ShaderGUI.FindProperty("_Wavex1y1x2y2", props);
-        this.waveSmallx1y1x2y2 = ShaderGUI.FindProperty("_WaveSmallx1y1x2y2", props);
+        this.refractionDistort = ShaderGUI.FindProperty(
+            "_RefractionDistort", props);
+        this.refractionOpacity = ShaderGUI.FindProperty(
+            "_RefractionOpacity", props);
 
-        this.waterColor1 = ShaderGUI.FindProperty("_WaterColor1", props);
-        this.waterColor2 = ShaderGUI.FindProperty("_WaterColor2", props);
+        this.waveTex = ShaderGUI.FindProperty(
+            "_WaveTex", props);
+        this.waveDistort = ShaderGUI.FindProperty(
+            "_WaveDistort", props);
 
-        this.ambianceColor = ShaderGUI.FindProperty("_AmbianceColor", props);
-        this.diffuseColor = ShaderGUI.FindProperty("_DiffuseColor", props);
-        this.specularColor = ShaderGUI.FindProperty("_SpecularColor", props);
-
-        this.refractionDistort = ShaderGUI.FindProperty("_RefractionDistort", props);
-        this.refractionOpacity = ShaderGUI.FindProperty("_RefractionOpacity", props);
-
-        this.reflection = ShaderGUI.FindProperty("_Reflection", props);
-        this.reflectionSpace = ShaderGUI.FindProperty("_ReflectionSpace", props);
-        this.reflectPower = ShaderGUI.FindProperty("_ReflectPower", props);
+        this.specularDir = ShaderGUI.FindProperty(
+            "_SpecularDir", props);
+        this.specularPow = ShaderGUI.FindProperty(
+            "_SpecularPow", props);
     }
 
     /// <inheritdoc/>
     protected override void OnShaderGUI(
         MaterialEditor materialEditor, Material[] materials)
     {
-        if (this.CheckOption(
-            materials,
-            "Enable Main",
-            "ENABLE_MAIN"))
-        {
-            GUILayoutEx.BeginContents();
-            materialEditor.TextureProperty(
-                this.mainTex, this.mainTex.displayName);
-            GUILayoutEx.EndContents();
-        }
+        materialEditor.VectorProperty(
+            this.waveScale, this.waveScale.displayName);
+        materialEditor.VectorProperty(
+            this.waveSpeed, this.waveSpeed.displayName);
+        materialEditor.TexturePropertySingleLine(
+            new GUIContent(this.bumpMap.displayName), this.bumpMap);
+        materialEditor.TexturePropertySingleLine(
+            new GUIContent(this.reflectiveColor.displayName),
+            this.reflectiveColor);
 
-        if (this.CheckOption(
-            materials,
-            "Enable Normal",
-            "ENABLE_NORMAL"))
+        EditorGUI.BeginChangeCheck();
+        bool refraction = this.CheckOption(
+            materials, "Refraction", "_REFRACTION");
+        if (EditorGUI.EndChangeCheck())
         {
-            GUILayoutEx.BeginContents();
-            materialEditor.TextureProperty(
-                this.normalMap, this.normalMap.displayName);
-            GUILayoutEx.EndContents();
-        }
-
-        if (this.CheckOption(
-            materials,
-            "Enable Height",
-            "ENABLE_HEIGHT"))
-        {
-            GUILayoutEx.BeginContents();
-            materialEditor.TextureProperty(
-                this.heightMap, this.heightMap.displayName);
-            materialEditor.ColorProperty(
-                this.waterColor1, this.waterColor1.displayName);
-            materialEditor.ColorProperty(
-                this.waterColor2, this.waterColor2.displayName);
-            GUILayoutEx.EndContents();
-        }
-
-        if (this.HasKeyword(materials, "ENABLE_NORMAL") || 
-            this.HasKeyword(materials, "ENABLE_HEIGHT"))
-        {
-            GUILayout.Label("Wave Parameter:");
-            GUILayoutEx.BeginContents();
-            materialEditor.VectorProperty(
-                this.wavex1y1x2y2, 
-                this.wavex1y1x2y2.displayName);
-            materialEditor.VectorProperty(
-                this.waveSmallx1y1x2y2, 
-                this.waveSmallx1y1x2y2.displayName);
-
-            if (this.CheckOption(
-                materials,
-                "Enable Wave Animation",
-                "ENABLE_WAVE_ANIMATION"))
+            if (refraction)
             {
-                materialEditor.RangeProperty(
-                    this.waterSpeed, this.waterSpeed.displayName);
+                foreach (var material in materials)
+                {
+                    material.SetInt("_SrcBlend", (int)BlendMode.One);
+                    material.SetInt("_DstBlend", (int)BlendMode.Zero);
+                }
+            }
+            else
+            {
+                foreach (var material in materials)
+                {
+                    material.SetInt("_SrcBlend", (int)BlendMode.SrcAlpha);
+                    material.SetInt("_DstBlend", (int)BlendMode.OneMinusSrcAlpha);
+                }
+            }
+        }
+
+        if (refraction)
+        {
+            materialEditor.FloatProperty(
+                this.refractionDistort, this.refractionDistort.displayName);
+            materialEditor.FloatProperty(
+                this.refractionOpacity, this.refractionOpacity.displayName);
+        }
+
+        if (this.CheckOption(materials, "Wave Texture", "_WAVE_TEXTURE"))
+        {
+            materialEditor.TexturePropertySingleLine(
+                new GUIContent(this.waveTex.displayName), this.waveTex);
+            materialEditor.FloatProperty(
+                this.waveDistort, this.waveDistort.displayName);
+        }
+
+        if (this.CheckOption(materials, "Specular", "_SPECULAR"))
+        {
+            var dir = this.specularDir.vectorValue;
+            var euler = Quaternion.LookRotation(dir, Vector3.up).eulerAngles;
+            EditorGUI.BeginChangeCheck();
+            euler = EditorGUILayout.Vector3Field("Dirctional", euler);
+            if (EditorGUI.EndChangeCheck())
+            {
+                dir = Quaternion.Euler(euler) * Vector3.forward;
+                this.specularDir.vectorValue = dir.normalized;
             }
 
-            GUILayoutEx.EndContents();
+            materialEditor.FloatProperty(
+                this.specularPow, this.specularPow.displayName);
         }
 
-        if (this.CheckOption(
-            materials,
-            "Enable Ambiance",
-            "ENABLE_AMBIANCE"))
+        this.CheckOption(materials, "Vertex Color", "_VERTEX_COLOR");
+    }
+
+    /// <inheritdoc/>
+    protected override void MaterialChanged(Material material)
+    {
+        if (material.IsKeywordEnabled("_REFRACTION"))
         {
-            EditorGUI.indentLevel = 1;
-            materialEditor.ColorProperty(
-                this.ambianceColor, this.ambianceColor.displayName);
-            EditorGUI.indentLevel = 0;
+            material.SetInt("_SrcBlend", (int)BlendMode.One);
+            material.SetInt("_DstBlend", (int)BlendMode.Zero);
         }
-
-        if (this.CheckOption(
-            materials,
-            "Enable Diffuse",
-            "ENABLE_DIFFUSE"))
+        else
         {
-            EditorGUI.indentLevel = 1;
-            materialEditor.ColorProperty(
-                this.diffuseColor, this.diffuseColor.displayName);
-            EditorGUI.indentLevel = 0;
+            material.SetInt("_SrcBlend", (int)BlendMode.SrcAlpha);
+            material.SetInt("_DstBlend", (int)BlendMode.OneMinusSrcAlpha);
         }
-
-        if (this.CheckOption(
-            materials,
-            "Enable Specular",
-            "ENABLE_SPECULAR"))
-        {
-            EditorGUI.indentLevel = 1;
-            materialEditor.ColorProperty(
-                this.specularColor, this.specularColor.displayName);
-            EditorGUI.indentLevel = 0;
-        }
-
-        if (this.CheckOption(
-            materials,
-            "Enable Refraction",
-            "ENABLE_REFRACTION"))
-        {
-            EditorGUI.indentLevel = 1;
-            materialEditor.RangeProperty(
-                this.refractionDistort, this.refractionDistort.displayName);
-            materialEditor.RangeProperty(
-                this.refractionOpacity, this.refractionOpacity.displayName);
-            EditorGUI.indentLevel = 0;
-        }
-
-        if (this.CheckOption(
-            materials,
-            "Enable Reflection",
-            "ENABLE_REFLECTION"))
-        {
-            EditorGUI.indentLevel = 1;
-            materialEditor.TexturePropertySingleLine(
-                new GUIContent(this.reflection.displayName), this.reflection);
-            materialEditor.RangeProperty(
-                this.reflectionSpace, this.reflectionSpace.displayName);
-            materialEditor.RangeProperty(
-                this.reflectPower, this.reflectPower.displayName);
-            EditorGUI.indentLevel = 0;
-        }
-
-        this.CheckOption(
-            materials,
-            "Enable Vertex Color",
-            "ENABLE_VERTEX_COLOR");
-        this.CheckOption(
-            materials,
-            "Enable Depth Texture",
-            "ENABLE_DEPTH_TEXTURE");
     }
 }

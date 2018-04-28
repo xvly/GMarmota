@@ -10,22 +10,6 @@
 
     public static class AssetTools {
 
-        [MenuItem("Assets/GStd/FindUncompressedImage")]
-        static void FindUncompressedImage()
-        {
-            var guids = AssetDatabase.FindAssets("t:texture", new string[] { "Assets/Game/UIs/Images" });
-            foreach(var guid in guids)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(guid);
-                var ti = AssetImporter.GetAtPath(path) as TextureImporter;
-                if (ti.textureCompression == TextureImporterCompression.Uncompressed)
-                {
-                    Debug.Log("!! " + path + "," + ti.maxTextureSize + "," + ti.spriteBorder);
-                }
-            }
-        }
-
-
         [MenuItem("Assets/GStd/Disable prewarm")]
         static void DiablePrewarm()
         {
@@ -207,6 +191,49 @@
             {
                 EditorUtility.SetDirty(go);
             }
+        }
+
+        public static bool FixMissingScripts(GameObject go)
+        {
+            SerializedObject so = new SerializedObject(go);
+            var properties = so.FindProperty("m_Component");
+            var components = go.GetComponents<Component>();
+            int propertyIndex = 0;
+            bool isAnyChange = false;
+            foreach(var component in components)
+            {
+                if (component == null)
+                {
+                    Debug.Log("fix missing scripts " + go.name + "," + propertyIndex);
+                    properties.DeleteArrayElementAtIndex(propertyIndex);
+                    isAnyChange = true;
+                }
+                propertyIndex++;
+            }
+
+            if (isAnyChange)
+                so.ApplyModifiedProperties();
+
+            return isAnyChange;
+        }
+
+        [MenuItem("Assets/Tools/remove missing scripts")]
+        static void RemoveMissingScripts()
+        {
+            var objs = Selection.GetFiltered<UnityEngine.GameObject>(SelectionMode.DeepAssets);
+            foreach(var obj in objs)
+            {
+                if (!(obj is GameObject))
+                    continue;
+
+                var tfs = obj.GetComponentsInChildren<Transform>(true);
+                foreach(var tf in tfs)
+                {
+                    FixMissingScripts(tf.gameObject);
+                }
+            }
+
+            AssetDatabase.Refresh();
         }
 
         #region material

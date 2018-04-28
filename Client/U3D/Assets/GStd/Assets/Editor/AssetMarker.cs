@@ -16,6 +16,7 @@ using UnityEditor;
     可选参数：
     ·fulldir：与AssetMarker配置文件的相对路径
     ·firstdir：与AssetMarker配置文件的相对路径的第一个目录命名。
+    ·seconddir：与AssetMarker配置文件的相对路径的第二个目录命名。
     ·filename：使用asset的名字命名
 ·include/exclude：资源筛选规则
 
@@ -41,6 +42,21 @@ namespace GStd.Editor.Asset{
 		[SerializeField]
 		private string include;
 
+        private string MarkSeconddir(string dir, string path)
+        {
+            var indexOfSplit = dir.IndexOf("/");
+            if (indexOfSplit != -1)
+            {
+                var secondIndexOfSplit = dir.IndexOf("/", indexOfSplit+1);
+                if (secondIndexOfSplit != -1)
+                    return dir.Substring(indexOfSplit, secondIndexOfSplit-indexOfSplit);
+                else
+                    return dir.Substring(indexOfSplit);
+            }
+            else
+                return dir;
+        }
+
 		private string MarkFirstdir(string dir, string path)
         {
             var indexOfSplit = dir.IndexOf("/");
@@ -56,6 +72,7 @@ namespace GStd.Editor.Asset{
         }
 
 		private const string strMarkFirstdir = "{firstdir}";
+        private const string strMarkSeconddir = "{seconddir}";
         private const string strMarkFulldir = "{fulldir}";
         private const string strMarkFilename = "{filename}";
 
@@ -67,6 +84,8 @@ namespace GStd.Editor.Asset{
             var ret = this.bundleName;
             if (this.bundleName.Contains(strMarkFirstdir))
                 ret = ret.Replace(strMarkFirstdir, this.MarkFirstdir(dir, path));
+            if (this.bundleName.Contains(strMarkSeconddir))
+                ret = ret.Replace(strMarkSeconddir, this.MarkSeconddir(dir, path));
             if (this.bundleName.Contains(strMarkFulldir))
                 ret = ret.Replace(strMarkFulldir, dir);
             if (this.bundleName.Contains(strMarkFilename))
