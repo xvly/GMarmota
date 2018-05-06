@@ -133,6 +133,8 @@ public static class ToLuaExport
         "Light.areaSize",
         "Light.lightmappingMode",
         "Light.lightmapBakeType",
+        "Light.shadowRadius",
+        "Light.shadowAngle",
         "Security.GetChainOfTrustValue",
         "Texture2D.alphaIsTransparency",
         "WWW.movie",

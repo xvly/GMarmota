@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1940540986
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 31d1926026079b2e7b714d454695289c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d78cc92ff6495e05bf4e889188aa226
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 221
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Actors/Role/1003/Shared/1003_animation.FBX
+- Assets/Game/Actors/Role/1003/Shared/1003_controller.overrideController
+Dependencies:
+- I:/Program/projects/GMarmota/Client/U3D/Assets/../AssetBundle/PC/AssetBundle/actors/standard

@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 20613115
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 14469105f5407a5ef6bafb6da785fe32
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b8cad7ef79841241028e7c6c0820fd52
+HashAppended: 0
+ClassTypes:
+- Class: 47
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a9e157131bfb589419ce592644a4a8c4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- ProjectSettings/QualitySettings.asset
+- Assets/Game/Actors/Role/AssetBundleMarker.asset
+Dependencies: []

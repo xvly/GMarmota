@@ -15,27 +15,44 @@ namespace GStd.Asset
         public GameObject prefab;
         public string assetBundleName;
         public string assetName;
+        public int maxCount;
+        public float duration2release;
+
         public List<SpawnedItem> spawned = new List<SpawnedItem>();
         public List<SpawnedItem> despawned = new List<SpawnedItem>();
 
         public Transform root;
 
-        public GameObject Spawn(Vector3 pos, Quaternion rot)
+        public GameObject Spawn(Vector3 pos, Quaternion rot, Transform parent)
 		{
 			SpawnedItem ret;
+
 			if (despawned.Count > 0)
 			{
 				ret = this.despawned[0];
                 this.despawned.RemoveAt(0);
-                ret.inst.transform.SetParent(null);
+                ret.freeTime = -1;
+                ret.inst.transform.SetParent(parent);
                 ret.inst.transform.SetPositionAndRotation(pos, rot);
+                ret.inst.SetActive(true);
+                this.spawned.Add(ret);
 			}
 			else
 			{
-                ret = new SpawnedItem(){inst = GameObject.Instantiate(prefab, pos, rot)};
+                if (this.maxCount != -1 && this.spawned.Count >= this.maxCount)
+                {
+                    ret = this.spawned[0];
+                    ret.inst.transform.SetParent(parent);
+                    ret.inst.transform.SetPositionAndRotation(pos, rot);
+                }
+                else
+                {
+                    ret = new SpawnedItem(){inst = GameObject.Instantiate(prefab, pos, rot, parent)};
+                    ret.inst.SetActive(true);
+                    this.spawned.Add(ret);
+                }
 			}
-
-			this.spawned.Add(ret);
+			
 			return ret.inst;
 		}
 
@@ -54,15 +71,15 @@ namespace GStd.Asset
 				return;
 			}
 
-            this.spawned.RemoveAll((x) => {return x.inst==inst;});
+            this.spawned.RemoveAll((x) => {return x.inst == inst;});
             inst.SetActive(false);
             inst.transform.SetParent(this.root);
             inst.transform.localPosition = Vector3.zero;
 
 			this.despawned.Add(
                 new SpawnedItem(){
-                    inst=inst, 
-                    freeTime=Time.realtimeSinceStartup+3
+                    inst = inst, 
+                    freeTime = Time.realtimeSinceStartup + time2release
                     }
                 );
 		}
@@ -83,16 +100,22 @@ namespace GStd.Asset
     public class GameObjectPool 
     {
         private Dictionary<string, Dictionary<string, PoolItem>> pool;
-        private Dictionary<GameObject, PoolItem> poolObjMap;
+        private Dictionary<GameObject, PoolItem> objMap;
+        private Dictionary<GameObject, PoolItem> prefabMap;
 
         private Transform root;
 
         public GameObjectPool()
         {
-            pool= new Dictionary<string, Dictionary<string, PoolItem>>();
-            poolObjMap = new Dictionary<GameObject, PoolItem>();
+            this.pool= new Dictionary<string, Dictionary<string, PoolItem>>();
+            this.objMap = new Dictionary<GameObject, PoolItem>();
+            this.prefabMap = new Dictionary<GameObject, PoolItem>();
 
-            var gameObject = new GameObject("GameObjectPool");
+            var gameObject = GameObject.Find("GameObjectPool");
+            if (gameObject == null)
+            {
+                gameObject = new GameObject("GameObjectPool");
+            }
             Object.DontDestroyOnLoad(gameObject);
 
             root = gameObject.transform;
@@ -100,68 +123,138 @@ namespace GStd.Asset
 
         public GameObject Spawn(string assetBundleName, string assetName)
         {
-            return this.Spawn(assetBundleName, assetName, Vector3.zero, Quaternion.identity);
+            return this.Spawn(assetBundleName, assetName, Vector3.zero, Quaternion.identity, null);
         }
 
-        public GameObject Spawn(string assetBundleName, string assetName, Vector3 pos, Quaternion rot)
+        public GameObject Spawn(string assetBundleName, string assetName, Vector3 pos, Quaternion rot, Transform parent)
         {
             if (!pool.ContainsKey(assetBundleName))
 			{
-                var prefab = AssetManager.LoadObject<GameObject>(assetBundleName, assetName);
+                var prefab = AssetManager.LoadAsset<GameObject>(assetBundleName, assetName);
+                
+                float duration2release = 3;
+                int maxCount = -1;
+                var entity = prefab.GetComponent<GameObjectPoolEntity>();
+                if (entity != null)
+                {
+                    duration2release = entity.duration2release;
+                    maxCount = entity.maxCount;
+                }
+
 				var item = new PoolItem(){ 
                     prefab = prefab, 
-                    root=root 
+                    root=root,
+                    duration2release = duration2release,
+                    maxCount = maxCount
                     };
+
 				pool.Add(
-					assetBundleName, new Dictionary<string, PoolItem>()
-					{ 
-						{
-							assetName, item
-						} 
-					}
+					assetBundleName, 
+                    new Dictionary<string, PoolItem>(){{assetName, item}}
 				);
 
-				this.poolObjMap[prefab] = item;
+				this.objMap[prefab] = item;
 
-                var ret = item.Spawn(pos, rot);
-                poolObjMap[ret] = item;
+                var ret = item.Spawn(pos, rot, parent);
+                objMap[ret] = item;
                 return ret;
 			}
 
 			if (!pool[assetBundleName].ContainsKey(assetName))
 			{
-				var prefab = AssetManager.LoadObject<GameObject>(assetBundleName, assetName);
-				var item = new PoolItem(){ prefab = prefab, root=root};
+				var prefab = AssetManager.LoadAsset<GameObject>(assetBundleName, assetName);
+               
+                float duration2release = 3;
+                int maxCount = -1;
+                var entity = prefab.GetComponent<GameObjectPoolEntity>();
+                if (entity != null)
+                {
+                    duration2release = entity.duration2release;
+                    maxCount = entity.maxCount;
+                }
+
+				var item = new PoolItem(){ 
+                    prefab = prefab, 
+                    root=root,
+                    duration2release = duration2release,
+                    maxCount = maxCount
+                    };
 
 				pool[assetBundleName].Add(assetName, item);
-				
 
-                var ret = item.Spawn(pos, rot);
-                poolObjMap[ret] = item;
+                var ret = item.Spawn(pos, rot, parent);
+                objMap[ret] = item;
                 return ret;
 			}
 
             {
                 var item = pool[assetBundleName][assetName];
-                var ret = item.Spawn(pos, rot);
-                poolObjMap[ret] = item;
+                var ret = item.Spawn(pos, rot, parent);
+                objMap[ret] = item;
+                return ret;
+            }
+        }
+
+        public GameObject Spawn(GameObject prefab)
+        {
+            return this.Spawn(prefab, Vector3.zero, Quaternion.identity, null);
+        }
+
+        public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent)
+        {   
+            if (prefab == null)
+            {
+                Debug.LogError("try to spawn null prefab");
+                return null;
+            }
+
+            if (!this.prefabMap.ContainsKey(prefab))
+            {
+                float duration2release = 3;
+                int maxCount = -1;
+                var entity = prefab.GetComponent<GameObjectPoolEntity>();
+                if (entity != null)
+                {
+                    duration2release = entity.duration2release;
+                    maxCount = entity.maxCount;
+                }
+
+                var item = new PoolItem(){ 
+                    prefab = prefab, 
+                    root=root,
+                    duration2release = duration2release,
+                    maxCount = maxCount
+                    };
+                
+                var ret = item.Spawn(pos, rot, parent);
+
+                objMap[ret] = item;
+                prefabMap[prefab] = item;
+
+                return ret;
+            }
+
+            {
+                var item = this.prefabMap[prefab];
+                var ret = item.Spawn(pos, rot, parent);
+                objMap[ret] = item;
                 return ret;
             }
         }
 
         public void Despawn(GameObject inst)
         {
-            if (!this.poolObjMap.ContainsKey(inst))
+            if (!this.objMap.ContainsKey(inst))
 			{
 				Debug.LogError("despawn failed");
 				return;
 			}
-			poolObjMap[inst].Despawn(inst);
+			objMap[inst].Despawn(inst);
         }
 
         void Update()
         {
-            foreach(var item in this.poolObjMap.Values)
+            foreach(var item in this.objMap.Values)
             {
                 item.Update();
             }

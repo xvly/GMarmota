@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+ 
+
 namespace GStd.Asset{
 	public abstract class AssetLoader
 	{
-		public abstract T LoadObject<T>(string assetBundleName, string assetName) where T:UnityEngine.Object;
-		public abstract Object LoadObject(string assetBundleName, string assetName, System.Type type);
+		public abstract T LoadAsset<T>(string assetBundleName, string assetName) where T:UnityEngine.Object;
+		public abstract Object LoadAsset(string assetBundleName, string assetName, System.Type type);
 	}
 }
 

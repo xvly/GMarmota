@@ -220,19 +220,22 @@
         [MenuItem("Assets/Tools/remove missing scripts")]
         static void RemoveMissingScripts()
         {
-            var objs = Selection.GetFiltered<UnityEngine.GameObject>(SelectionMode.DeepAssets);
+            var objs = Selection.GetFiltered<UnityEngine.Object>(SelectionMode.DeepAssets);
             foreach(var obj in objs)
             {
                 if (!(obj is GameObject))
                     continue;
 
-                var tfs = obj.GetComponentsInChildren<Transform>(true);
+                var go = obj as GameObject;
+                var tfs = go.GetComponentsInChildren<Transform>(true);
                 foreach(var tf in tfs)
                 {
-                    FixMissingScripts(tf.gameObject);
+                    if (FixMissingScripts(tf.gameObject))
+                        EditorUtility.SetDirty(obj);
                 }
             }
 
+            AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 

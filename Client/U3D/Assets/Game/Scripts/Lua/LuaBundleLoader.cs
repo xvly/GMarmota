@@ -129,7 +129,7 @@ public class LuaBundleLoader : LuaFileUtils
             return null;
         }
 
-        var textAsset = AssetManager.LoadObject<TextAsset>(bundleName, filePath);        
+        var textAsset = AssetManager.LoadAsset<TextAsset>(bundleName, filePath);        
 
         // var textAsset = AssetManager.LoadObjectLocal(
         //     bundleName, filePath, typeof(TextAsset)) as TextAsset;

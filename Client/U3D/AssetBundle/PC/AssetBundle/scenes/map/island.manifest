@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 2222028498
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f6824371d36b03cb69b26fb2fd391245
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/Game/Scenes/Map/island/island01_Main.unity
+Dependencies: []

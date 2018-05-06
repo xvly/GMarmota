@@ -1,0 +1,49 @@
+ManifestFileVersion: 0
+CRC: 1988036913
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a4f1f78a1f70df45e0fbb2a1f4acacc0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fb499d22ce59932338b12d9d81f55243
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 90
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d33d259b5bf8ea418118eda1c6ba07f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a5c7db70c4ba0d6458d727e682e542d4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+- Class: 221
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Actors/Role/1003/1003001/Materials/1003001.mat
+- Assets/Game/Actors/Role/1003/1003001/Materials/1003001_light.tga
+- Assets/Game/Actors/Role/1003/1003001/1003001.prefab
+- Assets/Game/Actors/Role/1003/1003001/Materials/1003001.tga
+Dependencies:
+- D:/Coder/Project/GMarmota/Client/U3D/Assets/../AssetBundle/Android/AssetBundle/actors/role/1003/1003001
+- D:/Coder/Project/GMarmota/Client/U3D/Assets/../AssetBundle/Android/AssetBundle/actors/role/1003/shared

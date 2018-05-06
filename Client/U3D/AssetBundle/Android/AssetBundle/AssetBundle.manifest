@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 1058462703
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: scenes/map/island
+      Dependencies: {}
+    Info_1:
+      Name: scenes/map/linshan01
+      Dependencies: {}
+    Info_2:
+      Name: uis/views/loading
+      Dependencies: {}
+    Info_3:
+      Name: actors/role/1003/1003001
+      Dependencies:
+        Dependency_0: actors/role/1003/shared
+    Info_4:
+      Name: actors/role/1003/shared
+      Dependencies:
+        Dependency_0: actors/standard
+    Info_5:
+      Name: actors/standard
+      Dependencies:
+        Dependency_0: actors/role/1003/shared
+    Info_6:
+      Name: actors/role/1003//1003001
+      Dependencies:
+        Dependency_0: actors/role/1003/1003001
+        Dependency_1: actors/role/1003/shared
+    Info_7:
+      Name: actors/role/1003/__foundation
+      Dependencies: {}

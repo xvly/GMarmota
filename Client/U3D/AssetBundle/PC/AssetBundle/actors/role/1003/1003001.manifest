@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 1465868635
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1b582b2a69cb05aa032a0b536e02a9e1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c36f14ca5f86bbb999efc95434df95dd
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Actors/Role/1003/1003001/1003001_model.FBX
+Dependencies:
+- D:/Coder/Project/GMarmota/Client/U3D/Assets/../AssetBundle/PC/AssetBundle/actors/role/1003/shared

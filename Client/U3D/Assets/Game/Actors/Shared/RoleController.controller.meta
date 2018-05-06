@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: f884ebb4c5520d04f850e9074f4a9ccf
+guid: ced608755aa76b44ca28300e932e5f75
+timeCreated: 1480315792
+licenseType: Free
 NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 0
   userData: 
-  assetBundleName: 
+  assetBundleName: actors/standard
   assetBundleVariant: 

@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1565832754
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bae3c7e1cd2b74d69cc120f8013405c0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 978ca24f29a0111f4091eb03d45bb332
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/UIs/Views/Loading/Loading.prefab
+Dependencies: []

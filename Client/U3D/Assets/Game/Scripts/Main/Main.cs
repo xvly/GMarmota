@@ -93,9 +93,7 @@ public class Main : MonoBehaviour {
 
     IEnumerator StartGame()
     {
-        #if UNITY_EDITOR
-        AssetManager.SetupSimulateLoader();
-        #endif
+        AssetManager.Setup();
 
         // setup asset manager
         // var waitMainfest = AssetManager.LoadLocalManifest("AssetBundle");

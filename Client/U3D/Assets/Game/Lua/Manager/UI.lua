@@ -19,7 +19,7 @@ function UI.Open(name)
         return
     end
 
-    local prefab = assetManager.LoadObject(string.format("uis/views/%s", name), name, typeof(GameObject))
+    local prefab = assetManager.LoadAsset(string.format("uis/views/%s", name), name, typeof(GameObject))
     assert(prefab, string.format("load object %s failed", name or "nil"))
 
     local inst = GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity)

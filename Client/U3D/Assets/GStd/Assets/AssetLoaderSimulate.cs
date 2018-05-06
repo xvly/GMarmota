@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace GStd.Asset{
 	public class AssetLoaderSimulate : AssetLoader {
-		public override T LoadObject<T>(string assetBundleName, string assetName)
+		public override T LoadAsset<T>(string assetBundleName, string assetName)
 		{
 			var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(assetBundleName, assetName);
 			if (assetPaths.Length == 0)
@@ -18,7 +18,7 @@ namespace GStd.Asset{
 				return AssetDatabase.LoadAssetAtPath<T>(assetPaths[0]);
 		}
 
-		public override Object LoadObject(string assetBundleName, string assetName, System.Type type)
+		public override Object LoadAsset(string assetBundleName, string assetName, System.Type type)
 		{
 			var assetPaths = AssetDatabase.GetAssetPathsFromAssetBundleAndAssetName(assetBundleName, assetName);
 			if (assetPaths.Length == 0)

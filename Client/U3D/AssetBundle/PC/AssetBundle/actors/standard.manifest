@@ -1,0 +1,85 @@
+ManifestFileVersion: 0
+CRC: 174562579
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0119ce0f796cedeaeff9f6ced885691b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 46daa0ab816e68f527f38fb18aec3007
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/Actors/Shared/Animations/d_skill2_1_back.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_2.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_3_back.anim
+- Assets/Game/Actors/Shared/Animations/d_jump 3.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_2.anim
+- Assets/Game/Actors/Shared/Animations/d_loseloop.anim
+- Assets/Game/Actors/Shared/Animations/d_skill2_1.anim
+- Assets/Game/Actors/Shared/Animations/d_die2.anim
+- Assets/Game/Actors/Shared/Animations/d_attack1.anim
+- Assets/Game/Actors/Shared/Animations/d_attack2.anim
+- Assets/Game/Actors/Shared/Animations/d_wing_spread.anim
+- Assets/Game/Actors/Shared/Animations/d_attack3_back.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_3_back.anim
+- Assets/Game/Actors/Shared/Animations/d_battle_start.anim
+- Assets/Game/Actors/Shared/Animations/d_idle_mount.anim
+- Assets/Game/Actors/Shared/RoleController.controller
+- Assets/Game/Actors/Shared/Animations/d_skill2_3_back.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_2_back.anim
+- Assets/Game/Actors/Shared/Animations/d_idle.anim
+- Assets/Game/Actors/Shared/Animations/d_dead.anim
+- Assets/Game/Actors/Shared/Animations/d_collect.anim
+- Assets/Game/Actors/Shared/Animations/d_battle_end.anim
+- Assets/Game/Actors/Shared/Animations/d_attack2_back.anim
+- Assets/Game/Actors/Shared/Animations/d_run.anim
+- Assets/Game/Actors/Shared/Animations/d_skill_god.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_1.anim
+- Assets/Game/Actors/Shared/MonsterController.controller
+- Assets/Game/Actors/Shared/MountController.controller
+- Assets/Game/Actors/Shared/Animations/d_skill2_2.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_2_back.anim
+- Assets/Game/Actors/Shared/Animations/d_wing_foldup.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_1_back.anim
+- Assets/Game/Actors/Shared/Animations/d_special_idle1.anim
+- Assets/Game/Actors/Shared/Animations/d_dead2.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_1_back.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_hug2_fast.anim
+- Assets/Game/Actors/Shared/Animations/d_jump.anim
+- Assets/Game/Actors/Shared/Animations/d_wing_to_spread.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_3.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_ride.anim
+- Assets/Game/Actors/Shared/Animations/d_losestart.anim
+- Assets/Game/Actors/Shared/ActorController.controller
+- Assets/Game/Actors/Shared/NPCController.controller
+- Assets/Game/Actors/Shared/Animations/d_jump 1.anim
+- Assets/Game/Actors/Shared/Animations/d_special_idle2.anim
+- Assets/Game/Actors/Shared/Animations/d_wing_to_foldon.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_hug1.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_hug1_fast.anim
+- Assets/Game/Actors/Shared/Animations/d_special_idle_start1.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_hug2.anim
+- Assets/Game/Actors/Shared/Animations/d_attack1_back.anim
+- Assets/Game/Actors/Shared/Animations/d_skill3_3.anim
+- Assets/Game/Actors/Shared/Animations/d_jump 2.anim
+- Assets/Game/Actors/Shared/Animations/d_skill2_3.anim
+- Assets/Game/Actors/Shared/Animations/d_statue_pose.anim
+- Assets/Game/Actors/Shared/Animations/d_hurt.anim
+- Assets/Game/Actors/Shared/Animations/d_attack3.anim
+- Assets/Game/Actors/Shared/Animations/d_skill1_1.anim
+- Assets/Game/Actors/Shared/Animations/d_winstart.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_run.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_idle.anim
+- Assets/Game/Actors/Shared/Animations/d_winloop.anim
+- Assets/Game/Actors/Shared/Animations/d_idle_battle.anim
+- Assets/Game/Actors/Shared/Animations/d_mount_ride_fast.anim
+- Assets/Game/Actors/Shared/Animations/d_skill2_2_back.anim
+- Assets/Game/Actors/Shared/Animations/d_die.anim
+- Assets/Game/Actors/Shared/Animations/d_run_battle.anim
+Dependencies:
+- I:/Program/projects/GMarmota/Client/U3D/Assets/../AssetBundle/PC/AssetBundle/actors/role/1003/shared

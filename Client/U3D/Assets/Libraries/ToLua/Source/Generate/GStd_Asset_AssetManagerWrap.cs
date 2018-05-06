@@ -7,56 +7,24 @@ public class GStd_Asset_AssetManagerWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginStaticLibs("AssetManager");
-		L.RegFunction("SetupSimulateLoader", SetupSimulateLoader);
-		L.RegFunction("SetupABLoader", SetupABLoader);
-		L.RegFunction("LoadObject", LoadObject);
+		L.RegFunction("Setup", Setup);
 		L.RegFunction("IsAssetBundleCache", IsAssetBundleCache);
 		L.RegFunction("UnloadAssetBundle", UnloadAssetBundle);
+		L.RegFunction("LoadAsset", LoadAsset);
+		L.RegFunction("Spawn", Spawn);
+		L.RegFunction("Despawn", Despawn);
+		L.RegFunction("Clear", Clear);
 		L.EndStaticLibs();
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetupSimulateLoader(IntPtr L)
+	static int Setup(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 0);
-			GStd.Asset.AssetManager.SetupSimulateLoader();
+			GStd.Asset.AssetManager.Setup();
 			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetupABLoader(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 0);
-			GStd.Asset.AssetManager.SetupABLoader();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadObject(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 3);
-			string arg0 = ToLua.CheckString(L, 1);
-			string arg1 = ToLua.CheckString(L, 2);
-			System.Type arg2 = ToLua.CheckMonoType(L, 3);
-			UnityEngine.Object o = GStd.Asset.AssetManager.LoadObject(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -89,6 +57,110 @@ public class GStd_Asset_AssetManagerWrap
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
 			GStd.Asset.AssetManager.UnloadAssetBundle(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadAsset(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			string arg0 = ToLua.CheckString(L, 1);
+			string arg1 = ToLua.CheckString(L, 2);
+			System.Type arg2 = ToLua.CheckMonoType(L, 3);
+			UnityEngine.Object o = GStd.Asset.AssetManager.LoadAsset(arg0, arg1, arg2);
+			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Spawn(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 1)
+			{
+				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
+				UnityEngine.GameObject o = GStd.Asset.AssetManager.Spawn(arg0);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 2)
+			{
+				string arg0 = ToLua.CheckString(L, 1);
+				string arg1 = ToLua.CheckString(L, 2);
+				UnityEngine.GameObject o = GStd.Asset.AssetManager.Spawn(arg0, arg1);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 4)
+			{
+				UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
+				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
+				UnityEngine.Quaternion arg2 = ToLua.ToQuaternion(L, 3);
+				UnityEngine.Transform arg3 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 4);
+				UnityEngine.GameObject o = GStd.Asset.AssetManager.Spawn(arg0, arg1, arg2, arg3);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 5)
+			{
+				string arg0 = ToLua.CheckString(L, 1);
+				string arg1 = ToLua.CheckString(L, 2);
+				UnityEngine.Vector3 arg2 = ToLua.ToVector3(L, 3);
+				UnityEngine.Vector3 arg3 = ToLua.ToVector3(L, 4);
+				UnityEngine.Transform arg4 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 5);
+				UnityEngine.GameObject o = GStd.Asset.AssetManager.Spawn(arg0, arg1, arg2, arg3, arg4);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: GStd.Asset.AssetManager.Spawn");
+			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Despawn(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 1, typeof(UnityEngine.GameObject));
+			GStd.Asset.AssetManager.Despawn(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Clear(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			GStd.Asset.AssetManager.Clear();
 			return 0;
 		}
 		catch (Exception e)
