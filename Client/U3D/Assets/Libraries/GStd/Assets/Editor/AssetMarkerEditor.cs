@@ -71,7 +71,7 @@ namespace GStd.Editor.Asset
             foreach(var kv in assetMarkers)
             {
                 var markerDir = Path.GetDirectoryName(kv.Key);
-                if (!path.StartsWith(markerDir))
+                if (!path.StartsWith(markerDir) || path[markerDir.Length+1] != '\\')
                     continue;
 
                 if (kv.Value.IsNeedMark(path))
