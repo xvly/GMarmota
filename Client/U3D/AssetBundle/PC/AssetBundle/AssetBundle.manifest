@@ -1,33 +1,81 @@
 ManifestFileVersion: 0
-CRC: 2254411562
+CRC: 18658712
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: scenes/map/island
+      Name: lua/base
       Dependencies: {}
     Info_1:
-      Name: scenes/map/linshan01
+      Name: lua/config
       Dependencies: {}
     Info_2:
-      Name: uis/views/loading
+      Name: lua/game
       Dependencies: {}
     Info_3:
+      Name: lua/init
+      Dependencies: {}
+    Info_4:
+      Name: lua/__foundation
+      Dependencies: {}
+    Info_5:
+      Name: lua/manager
+      Dependencies: {}
+    Info_6:
+      Name: lua/template
+      Dependencies: {}
+    Info_7:
+      Name: lua/tool
+      Dependencies: {}
+    Info_8:
+      Name: scenes/map/island
+      Dependencies: {}
+    Info_9:
+      Name: scenes/map/linshan01
+      Dependencies: {}
+    Info_10:
+      Name: uis/views/loading
+      Dependencies: {}
+    Info_11:
       Name: actors/role/1003/1003001
       Dependencies:
         Dependency_0: actors/role/1003/shared
-    Info_4:
+    Info_12:
       Name: actors/role/1003/shared
       Dependencies:
         Dependency_0: actors/standard
-    Info_5:
+    Info_13:
       Name: actors/standard
       Dependencies:
         Dependency_0: actors/role/1003/shared
-    Info_6:
+    Info_14:
       Name: actors/role/1003//1003001
       Dependencies:
         Dependency_0: actors/role/1003/1003001
         Dependency_1: actors/role/1003/shared
-    Info_7:
+    Info_15:
       Name: actors/role/1003/__foundation
+      Dependencies: {}
+    Info_16:
+      Name: lua/cjson
+      Dependencies: {}
+    Info_17:
+      Name: lua/jit
+      Dependencies: {}
+    Info_18:
+      Name: lua/lpeg
+      Dependencies: {}
+    Info_19:
+      Name: lua/misc
+      Dependencies: {}
+    Info_20:
+      Name: lua/protobuf
+      Dependencies: {}
+    Info_21:
+      Name: lua/socket
+      Dependencies: {}
+    Info_22:
+      Name: lua/system
+      Dependencies: {}
+    Info_23:
+      Name: lua/unityengine
       Dependencies: {}

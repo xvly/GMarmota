@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2297475564
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 49982a101574b08249bf5951b1e22753
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/ltn12.lua.bytes
+- Assets/Game/LuaBundleJit/mime.lua.bytes
+- Assets/Game/LuaBundleJit/slot.lua.bytes
+- Assets/Game/LuaBundleJit/typeof.lua.bytes
+- Assets/Game/LuaBundleJit/socket.lua.bytes
+- Assets/Game/LuaBundleJit/Main.lua.bytes
+- Assets/Game/LuaBundleJit/list.lua.bytes
+- Assets/Game/LuaBundleJit/event.lua.bytes
+- Assets/Game/LuaBundleJit/tolua.lua.bytes
+Dependencies: []

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: WaterProDaytime
-  m_Shader: {fileID: 4800000, guid: 31233096643ec634481fc71a11b5fc01, type: 3}
+  m_Shader: {fileID: 4800000, guid: f776e50d7bf6a834cab5276578ea1978, type: 3}
   m_ShaderKeywords: _REFRACTION _SPECULAR _VERTEX_COLOR _WAVE_TEXTURE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

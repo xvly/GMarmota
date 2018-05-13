@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1465868635
+CRC: 267738918
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -24,4 +24,4 @@ ClassTypes:
 Assets:
 - Assets/Game/Actors/Role/1003/1003001/1003001_model.FBX
 Dependencies:
-- D:/Coder/Project/GMarmota/Client/U3D/Assets/../AssetBundle/PC/AssetBundle/actors/role/1003/shared
+- I:/Program/projects/GMarmota/Client/U3D/Assets/../AssetBundle/PC/AssetBundle/actors/role/1003/shared

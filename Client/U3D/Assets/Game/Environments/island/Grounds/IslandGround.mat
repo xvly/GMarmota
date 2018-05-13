@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: IslandGround
-  m_Shader: {fileID: 4800000, guid: ed9c8bbaddb5aee47b0761f97a1f98ad, type: 3}
+  m_Shader: {fileID: 4800000, guid: da023c0015dde784a82c082ef1f1426c, type: 3}
   m_ShaderKeywords: ENABLE_REFLECTION ENABLE_SEPCULAR _LAYER4 _LIGHTING_PBR _NORMAL1
     _NORMAL2 _NORMAL3 _NORMAL4 _SMOOTHNESS_ALPHA
   m_LightmapFlags: 4

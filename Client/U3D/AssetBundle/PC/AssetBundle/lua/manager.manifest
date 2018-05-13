@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 4201565473
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2cae438ee166cdf9c0dd01e920c86e24
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/Manager/UI.lua.bytes
+- Assets/Game/LuaBundleJit/Manager/Config.lua.bytes
+- Assets/Game/LuaBundleJit/Manager/Scene.lua.bytes
+- Assets/Game/LuaBundleJit/Manager/Game.lua.bytes
+Dependencies: []

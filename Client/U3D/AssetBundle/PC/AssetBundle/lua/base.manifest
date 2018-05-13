@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3080695848
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8ca06626383bb00b9fe6bf72ddce0ff0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/Base/BaseClass.lua.bytes
+Dependencies: []

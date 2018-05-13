@@ -159,6 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4421467588696594}
   - component: {fileID: 137425605444785222}
+  - component: {fileID: 114543000848355492}
   m_Layer: 0
   m_Name: 2001
   m_TagString: Untagged
@@ -205,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4828777083531712}
   - component: {fileID: 136407544639111886}
+  - component: {fileID: 114666979130188328}
   m_Layer: 9
   m_Name: clickable
   m_TagString: Untagged

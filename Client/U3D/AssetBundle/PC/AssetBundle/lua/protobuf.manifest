@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 405599169
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0292928c57d1075d4ce11bbe3de54164
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/protobuf/text_format.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/descriptor.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/encoder.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/containers.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/listener.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/wire_format.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/protobuf.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/decoder.lua.bytes
+- Assets/Game/LuaBundleJit/protobuf/type_checkers.lua.bytes
+Dependencies: []

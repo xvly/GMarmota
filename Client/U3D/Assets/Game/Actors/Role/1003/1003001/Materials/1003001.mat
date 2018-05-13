@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 1003001
-  m_Shader: {fileID: 4800000, guid: 11c3ef15b99017a42843980ca9ed079c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 45220c41fcb65d746877ead42212831f, type: 3}
   m_ShaderKeywords: ALPHA_IS_METALLIC ENABLE_EMISSION ENABLE_MASK_CONTROL ENABLE_REFLECTION
     ENABLE_RIM ENABLE_RIM_LIGHT ENABLE_SEPCULAR _ALBEDOMAP _ALPHABLEND_ON _ALPHATEST_ON
     _ALPHA_BLEND _ALPHA_TEST

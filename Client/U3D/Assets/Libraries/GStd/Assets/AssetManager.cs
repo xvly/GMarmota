@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,9 +10,11 @@ using UnityEditor;
 namespace GStd.Asset{
 	public static class AssetManager
 	{
-#region editor
+		private static AssetLoader assetLoader;
+
+		// setup
 #if UNITY_EDITOR
-        private const string PREF_SIMULATE = "absimulate";
+		private const string PREF_SIMULATE = "absimulate";
 
         [MenuItem("GStd/AssetBundle/Simulate", false, 0)]
         private static void Simulate()
@@ -40,66 +43,6 @@ namespace GStd.Asset{
             Menu.SetChecked("GStd/AssetBundle/No Simulate", !EditorPrefs.GetBool(PREF_SIMULATE));
             return true;
         }
-
-		private static bool CheckSwitchPlatform(BuildTarget target)
-		{
-			#if UNITY_ANDROID
-			if (target != BuildTarget.Android)
-				return true;
-			#elif UNITY_IOS
-			if (target != BuildTarget.iOS)
-				return true;
-			#else
-			if (target != BuildTarget.StandaloneWindows && target != BuildTarget.StandaloneWindows64)
-				return true; 
-			#endif
-
-			return false;
-		}
-
-		[MenuItem("GStd/AssetBundle/Build/PC", false, 2)]
-		private static void BuildPC()
-		{
-			if (CheckSwitchPlatform(BuildTarget.StandaloneWindows) && !EditorUtility.DisplayDialog("提示", "将触发切换平台", "确定", "取消"))
-				return;
-
-            string outputPath = Application.dataPath + "/../AssetBundle/PC/AssetBundle";
-			if (!System.IO.Directory.Exists(outputPath))
-                System.IO.Directory.CreateDirectory(outputPath);
-			BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
-		}
-
-        [MenuItem("GStd/AssetBundle/Build/Android", false, 3)]
-        private static void BuildAndroid()
-        {
-            if (CheckSwitchPlatform(BuildTarget.Android) && !EditorUtility.DisplayDialog("提示", "将触发切换平台", "确定", "取消"))
-                return;
-
-            string outputPath = Application.dataPath + "/../AssetBundle/Android/AssetBundle";
-            if (!System.IO.Directory.Exists(outputPath))
-                System.IO.Directory.CreateDirectory(outputPath);
-            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.Android);
-        }
-
-        [MenuItem("GStd/AssetBundle/Build/iOS", false, 4)]
-        private static void BuildiOS()
-        {
-            if (CheckSwitchPlatform(BuildTarget.iOS) && !EditorUtility.DisplayDialog("提示", "将触发切换平台", "确定", "取消"))
-                return;
-
-            string outputPath = Application.dataPath + "/../AssetBundle/iOS/AssetBundle";
-            if (!System.IO.Directory.Exists(outputPath))
-                System.IO.Directory.CreateDirectory(outputPath);
-            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.iOS);
-        }
-#endif
-#endregion
-        
-#region setup
-		private static AssetLoader assetLoader;
-
-		// setup
-#if UNITY_EDITOR
 		private static bool IsSimulateAssetBundle()
 		{
 			return EditorPrefs.GetBool(PREF_SIMULATE);
@@ -110,8 +53,6 @@ namespace GStd.Asset{
 			assetLoader = new AssetLoaderSimulate();
 		}
 #endif
-
-		
 
 		public static void Setup()
 		{
@@ -131,9 +72,7 @@ namespace GStd.Asset{
 		{
 			assetLoader = new AssetLoaderAB();
 		}
-		#endregion
 
-#region asset bundle functions
 		// asset bundle
 		public struct LoadItem
 		{
@@ -163,6 +102,11 @@ namespace GStd.Asset{
 			return assetLoader.LoadAsset(assetBundleName, assetName, type);
 		}
 
+		public static void LoadLevel(string assetBundleName, string sceneName, LoadSceneMode loadMode, System.Action complete, System.Action<float> progress)
+		{
+			Scheduler.RunCoroutine(assetLoader.LoadLevel(assetBundleName, sceneName, loadMode, complete, progress));
+		}
+
 		public static bool IsAssetBundleCache(string assetBundleName)
 		{
 			return false;	
@@ -172,9 +116,7 @@ namespace GStd.Asset{
 		{
 			
 		}
-#endregion
-
-#region pool
+	
 		// pool
 		private static GameObjectPool gameObjectPool;
 
@@ -206,7 +148,6 @@ namespace GStd.Asset{
 		{
 
 		}
-#endregion
 	}
 }
 

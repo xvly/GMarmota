@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2468930788
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2f039aa8813e4477b346158a9f2f690d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/UnityEngine/Vector4.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Profiler.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/LayerMask.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Ray.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Mathf.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Plane.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Vector2.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/RaycastHit.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Quaternion.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Time.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Bounds.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Vector3.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Color.lua.bytes
+- Assets/Game/LuaBundleJit/UnityEngine/Touch.lua.bytes
+Dependencies: []

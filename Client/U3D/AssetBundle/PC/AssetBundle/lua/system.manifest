@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 636762063
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2d93e1817c499a5a946f3ca5c8c51f8d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Game/LuaBundleJit/System/coroutine.lua.bytes
+- Assets/Game/LuaBundleJit/System/ValueType.lua.bytes
+- Assets/Game/LuaBundleJit/System/Timer.lua.bytes
+- Assets/Game/LuaBundleJit/System/Reflection/BindingFlags.lua.bytes
+Dependencies: []

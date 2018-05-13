@@ -1,6 +1,6 @@
 local UI = {}
 
-local assetManager = GStd.Asset.AssetManager
+local AssetManager = GStd.Asset.AssetManager
 local GameObject = UnityEngine.GameObject
 
 local opened = {}
@@ -15,18 +15,23 @@ function UI.Open(name)
     end
 
     if cached[name] ~= nil then
-        cached[name].gameObject:SetActive(true)
+        local data = cached[name]
+        cached[name] = nil
+        opened[name] = data
+        data.inst:SetActive(true)
         return
     end
 
-    local prefab = assetManager.LoadAsset(string.format("uis/views/%s", name), name, typeof(GameObject))
+    local prefab = AssetManager.LoadAsset(string.format("uis/views/%s", name), name, typeof(GameObject))
     assert(prefab, string.format("load object %s failed", name or "nil"))
 
     local inst = GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity)
     inst.transform:SetParent(root.transform, false)
     
     opened = {
-        inst = inst
+        [name] = {
+            inst=inst,
+        }
     }    
 end
 
@@ -38,10 +43,34 @@ function UI.Close(name)
 
     local data = opened[name]
     data.inst:SetActive(false)
+    data.time2destroy = Time.realtimeSinceStartup + 10
+
+    opened[name] = nil
+    cached[name] = data
 end
 
 function UI.IsOpen()
     return opened[name] ~= nil
 end
+
+local Time = Time
+
+local function Update()
+    local toRemove = {}
+    for name, uiData in pairs(cached) do
+        if uiData.time2destroy <= Time.realtimeSinceStartup then
+            table.insert(toRemove, name)
+            GameObject.Destroy(uiData.inst)
+        end
+    end
+
+    for _, name in ipairs(toRemove) do
+        cached[name] = nil
+    end
+end
+
+local UpdateBeat = UpdateBeat
+UpdateBeat:AddListener(UpdateBeat:CreateListener(Update))
+
 
 return UI

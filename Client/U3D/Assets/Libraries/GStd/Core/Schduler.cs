@@ -23,6 +23,7 @@ namespace GStd{
 
 		public static Coroutine RunCoroutine(IEnumerator coroutine)
 		{
+			CheckAndInit();
 			return _coroutine.StartCoroutine(coroutine);
 		}
 
@@ -61,6 +62,9 @@ namespace GStd{
 		/// </summary>
 		void Update()
 		{
+			if (this.frameListeners == null)
+				return;
+
 			foreach(var action in this.frameListeners)
 			{
 				action();

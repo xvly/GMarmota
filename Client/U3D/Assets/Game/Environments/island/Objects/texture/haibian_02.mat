@@ -7,15 +7,14 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: haibian_02
-  m_Shader: {fileID: 4800000, guid: 11c3ef15b99017a42843980ca9ed079c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 45220c41fcb65d746877ead42212831f, type: 3}
   m_ShaderKeywords: _ALBEDOMAP _ALPHATEST_ON _EMISSION _LIGHTING_PBR _MASKMAP _NORMALMAP
     _SMOOTHNESS_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: TransparentCutout
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3

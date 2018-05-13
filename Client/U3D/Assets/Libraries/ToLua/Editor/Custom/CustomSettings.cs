@@ -145,9 +145,10 @@ public static class CustomSettings
         _GT(typeof(BlendWeights)),           
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),     
-        _GT(typeof(LuaProfiler)),
+        _GT(typeof(LuaProfiler)),   
 
         _GT(typeof(UnityEngine.RectTransform)),
+        _GT(typeof(UnityEngine.SceneManagement.LoadSceneMode)),
 
         _GT(typeof(GStd.Asset.AssetManager)),
     };

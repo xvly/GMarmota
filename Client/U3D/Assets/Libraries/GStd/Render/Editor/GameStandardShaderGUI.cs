@@ -1,5 +1,5 @@
-﻿//------------------------------------------------------------------------------
-// Copyright (c) 2018-2018 Nirvana Technology Co. Ltd.
+//------------------------------------------------------------------------------
+// Copyright (c) 2018-2018 GStd Technology Co. Ltd.
 // All Right Reserved.
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // Proprietary and confidential.

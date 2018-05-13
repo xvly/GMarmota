@@ -8,9 +8,10 @@ public class GStd_Asset_AssetManagerWrap
 	{
 		L.BeginStaticLibs("AssetManager");
 		L.RegFunction("Setup", Setup);
+		L.RegFunction("LoadAsset", LoadAsset);
+		L.RegFunction("LoadLevel", LoadLevel);
 		L.RegFunction("IsAssetBundleCache", IsAssetBundleCache);
 		L.RegFunction("UnloadAssetBundle", UnloadAssetBundle);
-		L.RegFunction("LoadAsset", LoadAsset);
 		L.RegFunction("Spawn", Spawn);
 		L.RegFunction("Despawn", Despawn);
 		L.RegFunction("Clear", Clear);
@@ -24,6 +25,45 @@ public class GStd_Asset_AssetManagerWrap
 		{
 			ToLua.CheckArgsCount(L, 0);
 			GStd.Asset.AssetManager.Setup();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadAsset(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			string arg0 = ToLua.CheckString(L, 1);
+			string arg1 = ToLua.CheckString(L, 2);
+			System.Type arg2 = ToLua.CheckMonoType(L, 3);
+			UnityEngine.Object o = GStd.Asset.AssetManager.LoadAsset(arg0, arg1, arg2);
+			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LoadLevel(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 5);
+			string arg0 = ToLua.CheckString(L, 1);
+			string arg1 = ToLua.CheckString(L, 2);
+			UnityEngine.SceneManagement.LoadSceneMode arg2 = (UnityEngine.SceneManagement.LoadSceneMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.SceneManagement.LoadSceneMode));
+			System.Action arg3 = (System.Action)ToLua.CheckDelegate<System.Action>(L, 4);
+			System.Action<float> arg4 = (System.Action<float>)ToLua.CheckDelegate<System.Action<float>>(L, 5);
+			GStd.Asset.AssetManager.LoadLevel(arg0, arg1, arg2, arg3, arg4);
 			return 0;
 		}
 		catch (Exception e)
@@ -58,25 +98,6 @@ public class GStd_Asset_AssetManagerWrap
 			string arg0 = ToLua.CheckString(L, 1);
 			GStd.Asset.AssetManager.UnloadAssetBundle(arg0);
 			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadAsset(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 3);
-			string arg0 = ToLua.CheckString(L, 1);
-			string arg1 = ToLua.CheckString(L, 2);
-			System.Type arg2 = ToLua.CheckMonoType(L, 3);
-			UnityEngine.Object o = GStd.Asset.AssetManager.LoadAsset(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{

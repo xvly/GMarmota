@@ -1,7 +1,8 @@
-﻿//------------------------------------------------------------------------------
-// This file is part of MistLand project in GStd.
-// Copyright © 2016-2016 GStd Technology Co., Ltd.
+//------------------------------------------------------------------------------
+// Copyright (c) 2018-2018 GStd Technology Co. Ltd.
 // All Right Reserved.
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+// Proprietary and confidential.
 //------------------------------------------------------------------------------
 
 using GStd.Editor;
@@ -13,88 +14,221 @@ using UnityEngine;
 /// </summary>
 public class GameTerrainShaderGUI : GStdShaderGUI
 {
-    private MaterialProperty splat0;
-    private MaterialProperty splat1;
-    private MaterialProperty splat2;
-    private MaterialProperty splat3;
     private MaterialProperty control;
+    private MaterialProperty splat1;
+    private MaterialProperty splat1Normal;
+    private MaterialProperty splat2;
+    private MaterialProperty splat2Normal;
+    private MaterialProperty splat3;
+    private MaterialProperty splat3Normal;
+    private MaterialProperty splat4;
+    private MaterialProperty splat4Normal;
 
-    private MaterialProperty specularPower;
-    private MaterialProperty specularIntensity;
+    private MaterialProperty emissionColor;
+
+    private MaterialProperty smoothness;
     private MaterialProperty specularColor;
 
-    private MaterialProperty reflectionOpacity;
-    private MaterialProperty reflectionIntensity;
-    private MaterialProperty reflectionFresnel;
-    private MaterialProperty reflectionMetallic;
+    private MaterialProperty metallic;
+    private MaterialProperty reflectionColor;
 
     /// <inheritdoc/>
     protected override void FindProperties(MaterialProperty[] props)
     {
-        this.splat0 = ShaderGUI.FindProperty("_Splat0", props);
-        this.splat1 = ShaderGUI.FindProperty("_Splat1", props);
-        this.splat2 = ShaderGUI.FindProperty("_Splat2", props);
-        this.splat3 = ShaderGUI.FindProperty("_Splat3", props);
         this.control = ShaderGUI.FindProperty("_Control", props);
+        this.splat1 = ShaderGUI.FindProperty("_Splat1", props);
+        this.splat1Normal = ShaderGUI.FindProperty("_Splat1_Normal", props);
+        this.splat2 = ShaderGUI.FindProperty("_Splat2", props);
+        this.splat2Normal = ShaderGUI.FindProperty("_Splat2_Normal", props);
+        this.splat3 = ShaderGUI.FindProperty("_Splat3", props);
+        this.splat3Normal = ShaderGUI.FindProperty("_Splat3_Normal", props);
+        this.splat4 = ShaderGUI.FindProperty("_Splat4", props);
+        this.splat4Normal = ShaderGUI.FindProperty("_Splat4_Normal", props);
 
-        this.specularPower = ShaderGUI.FindProperty("_SpecularPower", props);
-        this.specularIntensity = ShaderGUI.FindProperty("_SpecularIntensity", props);
+        this.emissionColor = ShaderGUI.FindProperty("_EmissionColor", props);
+
+        this.smoothness = ShaderGUI.FindProperty("_Smoothness", props);
         this.specularColor = ShaderGUI.FindProperty("_SpecularColor", props);
 
-        this.reflectionOpacity = ShaderGUI.FindProperty("_ReflectionOpacity", props);
-        this.reflectionIntensity = ShaderGUI.FindProperty("_ReflectionIntensity", props);
-        this.reflectionFresnel = ShaderGUI.FindProperty("_ReflectionFresnel", props);
-        this.reflectionMetallic = ShaderGUI.FindProperty("_ReflectionMetallic", props);
+        this.metallic = ShaderGUI.FindProperty("_Metallic", props);
+        this.reflectionColor = ShaderGUI.FindProperty("_ReflectionColor", props);
     }
 
     /// <inheritdoc/>
     protected override void OnShaderGUI(
         MaterialEditor materialEditor, Material[] materials)
     {
+        this.LayerGUI(materialEditor, materials);
         this.ColorGUI(materialEditor, materials);
-        this.ReflectionGUI(materialEditor, materials);
+        this.LightingGUI(materialEditor, materials);
+    }
+
+    private void LayerGUI(
+        MaterialEditor materialEditor, Material[] materials)
+    {
+        materialEditor.TexturePropertySingleLine(
+            new GUIContent("Control"), this.control);
+
+        var layerOptions = new GUIContent[]
+        {
+            new GUIContent("Layer2"),
+            new GUIContent("Layer3"),
+            new GUIContent("Layer4"),
+        };
+        var layerKeys = new string[]
+        {
+            "_",
+            "_LAYER3",
+            "_LAYER4",
+        };
+
+        EditorGUI.BeginChangeCheck();
+        int index = this.ListOptions(materials, layerOptions, layerKeys, true);
+        if (EditorGUI.EndChangeCheck())
+        {
+            if (index == 0)
+            {
+                foreach (var m in materials)
+                {
+                    m.DisableKeyword("_NORMAL3");
+                    m.DisableKeyword("_NORMAL4");
+                }
+            }
+            else if (index == 1)
+            {
+                foreach (var m in materials)
+                {
+                    m.DisableKeyword("_NORMAL4");
+                }
+            }
+        }
+
+        EditorGUILayout.LabelField("Layer 1:", EditorStyles.boldLabel);
+        materialEditor.TexturePropertySingleLine(
+            new GUIContent("Albedo"), this.splat1);
+        this.TextureGUIWithKeyword(
+            materialEditor,
+            materials,
+            this.splat1Normal,
+            "Normal",
+            "_NORMAL1");
+
+        materialEditor.TextureScaleOffsetProperty(this.splat1);
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Layer 2:", EditorStyles.boldLabel);
+        materialEditor.TexturePropertySingleLine(
+            new GUIContent("Albedo"), this.splat2);
+        this.TextureGUIWithKeyword(
+            materialEditor,
+            materials,
+            this.splat2Normal,
+            "Normal",
+            "_NORMAL2");
+
+        materialEditor.TextureScaleOffsetProperty(this.splat2);
+        EditorGUILayout.Space();
+
+        if (index > 0)
+        {
+            EditorGUILayout.LabelField("Layer 3:", EditorStyles.boldLabel);
+            materialEditor.TexturePropertySingleLine(
+                new GUIContent("Albedo"), this.splat3);
+            this.TextureGUIWithKeyword(
+                materialEditor,
+                materials,
+                this.splat3Normal,
+                "Normal",
+                "_NORMAL3");
+
+            materialEditor.TextureScaleOffsetProperty(this.splat3);
+            EditorGUILayout.Space();
+        }
+
+        if (index > 1)
+        {
+            EditorGUILayout.LabelField("Layer 4:", EditorStyles.boldLabel);
+            materialEditor.TexturePropertySingleLine(
+                new GUIContent("Albedo"), this.splat4);
+            this.TextureGUIWithKeyword(
+                materialEditor,
+                materials,
+                this.splat4Normal,
+                "Normal",
+                "_NORMAL4");
+
+            materialEditor.TextureScaleOffsetProperty(this.splat4);
+            EditorGUILayout.Space();
+        }
+
+        var contents = new GUIContent[]
+        {
+            new GUIContent("Normal"),
+            new GUIContent("Emission"),
+            new GUIContent("Smoothess"),
+            new GUIContent("Metallic"),
+        };
+        var keys = new string[]
+        {
+                "_",
+                "_EMISSION_ALPHA",
+                "_SMOOTHNESS_ALPHA",
+                "_METALLIC_ALPHA",
+        };
+
+        EditorGUI.indentLevel = 1;
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.PrefixLabel("Alpha Usage:");
+        this.ListOptions(materials, contents, keys, true);
+        EditorGUILayout.EndHorizontal();
+        EditorGUI.indentLevel = 0;
     }
 
     private void ColorGUI(
         MaterialEditor materialEditor, Material[] materials)
     {
-        materialEditor.TextureProperty(this.splat0, "Layer 0");
-        materialEditor.TextureProperty(this.splat1, "Layer 1");
-        materialEditor.TextureProperty(this.splat2, "Layer 2");
-        materialEditor.TextureProperty(this.splat3, "Layer 3");
-        materialEditor.TextureProperty(this.control, "Control");
+        EditorGUILayout.LabelField("Colors", EditorStyles.boldLabel);
 
-        if (this.CheckOption(
-                materials,
-                "Enable Specular",
-                "ENABLE_SEPCULAR"))
+        EditorGUILayout.BeginHorizontal();
+        if (this.CheckOption(materials, "Emission", "_EMISSION"))
         {
-            EditorGUI.indentLevel = 1;
-
-            materialEditor.FloatProperty(this.specularPower, "Specular Power");
-            materialEditor.FloatProperty(this.specularIntensity, "Specular Intensity");
-            materialEditor.ColorProperty(this.specularColor, "Specular Color");
-
-            EditorGUI.indentLevel = 0;
+            materialEditor.ColorProperty(this.emissionColor, string.Empty);
         }
+
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space();
     }
 
-    private void ReflectionGUI(
+    private void LightingGUI(
         MaterialEditor materialEditor, Material[] materials)
     {
-        if (this.CheckOption(
-            materials,
-            "Enable Reflection",
-            "ENABLE_REFLECTION"))
+        EditorGUILayout.LabelField("Lighting", EditorStyles.boldLabel);
+
+        var contents = new GUIContent[]
         {
-            EditorGUI.indentLevel = 1;
+            new GUIContent("Unlit"),
+            new GUIContent("Diffuse"),
+            new GUIContent("PBR"),
+        };
+        var keys = new string[]
+        {
+            "_",
+            "_LIGHTING_DIFFUSE",
+            "_LIGHTING_PBR",
+        };
 
-            materialEditor.RangeProperty(this.reflectionOpacity, "Opacity");
-            materialEditor.RangeProperty(this.reflectionIntensity, "Intensity");
-            materialEditor.RangeProperty(this.reflectionFresnel, "Fresnel");
-            materialEditor.RangeProperty(this.reflectionMetallic, "Metallic");
+        int index = this.ListOptions(materials, contents, keys, true);
+        if (index == 2)
+        {
+            materialEditor.RangeProperty(this.smoothness, "Smoothness");
+            materialEditor.RangeProperty(this.metallic, "Metallic");
 
-            EditorGUI.indentLevel = 0;
+            materialEditor.ColorProperty(
+                this.specularColor, "Specular Color");
+            materialEditor.ColorProperty(
+                this.reflectionColor, "Reflection Color");
         }
+
+        EditorGUILayout.Space();
     }
 }

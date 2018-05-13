@@ -49,9 +49,9 @@ namespace GStd.Editor.Asset{
             {
                 var secondIndexOfSplit = dir.IndexOf("/", indexOfSplit+1);
                 if (secondIndexOfSplit != -1)
-                    return dir.Substring(indexOfSplit, secondIndexOfSplit-indexOfSplit);
+                    return dir.Substring(indexOfSplit+1, secondIndexOfSplit-indexOfSplit-1);
                 else
-                    return dir.Substring(indexOfSplit);
+                    return dir.Substring(indexOfSplit+1);
             }
             else
                 return dir;
@@ -135,6 +135,16 @@ namespace GStd.Editor.Asset{
             var rootDirectory = Path.GetDirectoryName(selfPath);
 
             var guids = AssetDatabase.FindAssets("t:object", new string[]{ rootDirectory });
+            // guid去重，查找出来的guid可能会有重复先，例如fbx带有多个动作，也会被找出多份。
+            List<string> guidList = new List<string>();
+            foreach(var guid in guids)
+            {
+                if (!guidList.Contains(guid))
+                    guidList.Add(guid);
+            }
+            guids = guidList.ToArray();
+
+            //            
             Dictionary<string, List<string>> datas = new Dictionary<string, List<string>>();
             foreach(var guid in guids)
             {

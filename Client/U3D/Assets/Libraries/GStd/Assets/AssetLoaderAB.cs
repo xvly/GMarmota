@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 
 namespace GStd.Asset
@@ -12,11 +13,6 @@ namespace GStd.Asset
 		public AssetLoaderAB()
 		{
 			this.LoadManifest();
-		}
-
-		public void UpdateAssetBundle()
-		{
-
 		}
 
 		private void LoadManifest()
@@ -45,5 +41,13 @@ namespace GStd.Asset
 			var ab = AssetBundle.LoadFromFile(fullAssetBundlePath);
 			return ab.LoadAsset(assetName, type);
 		}	
+
+		public override IEnumerator LoadLevel(string assetBundleName, string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadMode, System.Action complete, System.Action<float> progress)
+		{
+			Debug.Log("!! load level 1" + assetBundleName + "," + sceneName + "," + loadMode);
+			yield return new WaitForSeconds(1);
+
+			Debug.Log("!! load level 2" );
+		}
 	}
 }
