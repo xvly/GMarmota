@@ -6648,7 +6648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1025433578230522, guid: b5b922d252512624e9cbb3e7a1ec91e3, type: 2}
-  walkable:
+  walkableLayer:
     serializedVersion: 2
     m_Bits: 256
 --- !u!4 &381431823
@@ -25352,7 +25352,7 @@ MonoBehaviour:
   target: {fileID: 381431823}
   followSpeed: 3.03
   offset: {x: 6.5699997, y: 5.0299997, z: 3.9400005}
-  lookAtOffset: {x: 0, y: 0.3699999, z: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
   elastic:
     serializedVersion: 2
     m_Curve:
@@ -25383,7 +25383,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1187636466}
-  m_LocalRotation: {x: -0.13298509, y: 0.8378625, z: -0.2348157, w: -0.47451347}
+  m_LocalRotation: {x: -0.14115015, y: 0.83368754, z: -0.24923296, w: -0.47214904}
   m_LocalPosition: {x: 74.62, y: 1.47, z: 13.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

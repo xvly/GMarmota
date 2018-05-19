@@ -1,10 +1,11 @@
+require("Init.RequireList")
+
 local scene = require("Manager.Scene")
 
 local Game = {}
 
-local loginSceneId = 1001
 local function EnterLogin()
-    scene.Change(loginSceneId)
+    scene.ChangeLogin()
 end
 
 function Game.Enter()

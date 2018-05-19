@@ -1,5 +1,4 @@
 local game = require("Manager.Game")
-
 game.Enter()
 
 -- local function _TestCoroutine(arg1, arg2)

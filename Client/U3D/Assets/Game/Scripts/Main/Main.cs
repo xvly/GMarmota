@@ -104,7 +104,7 @@ public class Main : MonoBehaviour {
             this.luaState.LuaSetField(LuaIndexes.LUA_GLOBALSINDEX, "_isDebugBuild");
             this.luaState.LuaPop(1);
 
-            this.luaState.DoFile("main.lua");
+            this.luaState.DoFile("Init/Main.lua");
         }
         catch (LuaException exp)
         {

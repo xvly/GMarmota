@@ -132,6 +132,32 @@
             Debug.Log("disable ui raycast finished");
         }
 
+        [MenuItem("GStd/Fix/Clear scene missing scripts")]
+        static void Fix_ClearSceneMissingScripts()
+        {
+            //var objs = Selection.GetFiltered<UnityEngine.Object>(SelectionMode.DeepAssets);
+            var objs = GameObject.FindObjectsOfTypeAll(typeof(GameObject));
+            foreach (var obj in objs)
+            {
+                var go = obj as GameObject;
+                if (go != null)
+                {
+                    // CheckMissing(obj as GameObject, typeof(MonoBehaviour));
+                    //var behaviours = go.GetComponentsInChildren<MonoBehaviour>(true);
+                    var behaviours = go.GetComponents<MonoBehaviour>();
+                    foreach(var behaviour in behaviours)
+                    {
+                        if (behaviour == null)
+                        {
+                            Debug.Log("!! missing " + go.name);
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
+
         [MenuItem("Assets/GStd/Set missing reference to none")]
         static void SetMissingReferenceToNone()
         {

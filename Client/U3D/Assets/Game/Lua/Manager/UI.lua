@@ -8,7 +8,25 @@ local cached = {}
 
 local root = GameObject.Find("Main/UI/2D/Canvas")
 
+local uis = {}
+
+local baseui = require("Base.BaseUI")
+
+function UI.Register(name)
+    print_log("ui register ", name)
+    local ui = {}
+    uis[name] = ui
+    setmetatable(ui, {__index=baseui})
+    return ui
+end
+
 function UI.Open(name)
+    local ui = uis[name]
+    if ui == nil then
+        print_error(string.format("ui %s not register ", name or "nil"))
+        return
+    end
+
     if opened[name] ~= nil then
         print_log(string.format("ui %s already opened", name))
         return
@@ -22,7 +40,7 @@ function UI.Open(name)
         return
     end
 
-    local prefab = AssetManager.LoadAsset(string.format("uis/views/%s", name), name, typeof(GameObject))
+    local prefab = AssetManager.LoadAsset(ui.ab, ui.asset, typeof(GameObject))
     assert(prefab, string.format("load object %s failed", name or "nil"))
 
     local inst = GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity)

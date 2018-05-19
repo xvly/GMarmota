@@ -1,6 +1,6 @@
 local data = {
-    ab = "scenes/login",
-    asset = "login"
+    ab = "scenes/map/empty",
+    asset = "Empty"
 }
 
 return data
