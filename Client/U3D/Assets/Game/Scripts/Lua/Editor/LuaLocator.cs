@@ -45,23 +45,25 @@ public static class LuaLocator
         }
 
         // 点击日志，判断日志内容，分析出lua文件路径和行号
-        // var log = ConsoleWindowSelectedLog;
-        // if (log != null)
-        // {
-        //     var match = Regex.Match(log, @"\[(.*.lua):(.*?)\]:");
-        //     if (match.Success && match.Groups.Count > 2)
-        //     {
-        //         var matchPath = Path.Combine("Assets/Game/Lua", match.Groups[1].Value);
-        //         var matchLine = int.Parse(match.Groups[2].Value);
+        var log = ConsoleWindowSelectedLog;
+        if (log != null)
+        {
+            var match = Regex.Match(log, @"\[(.*.lua):(.*?)\]:");
+            if (match.Success && match.Groups.Count > 2)
+            {
+                var matchPath = Path.Combine("Assets/Game/Lua", match.Groups[1].Value);
+                var matchLine = int.Parse(match.Groups[2].Value);
 
-        //         //return TextEditorTool.OpenText(matchPath, matchLine, 0);
+                //return TextEditorTool.OpenText(matchPath, matchLine, 0);
 
-        //         var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(matchPath);
-        //         lastOpenInstanceID = asset.GetInstanceID();
-        //         lastOpenLine = matchLine;
-        //         return AssetDatabase.OpenAsset(asset, matchLine);
-        //     }
-        // }
+                return UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(matchPath, matchLine);
+
+                // var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(matchPath);
+                // lastOpenInstanceID = asset.GetInstanceID();
+                // lastOpenLine = matchLine;
+                // return AssetDatabase.OpenAsset(asset, matchLine);
+            }
+        }
         
 
         // 不做任何处理
