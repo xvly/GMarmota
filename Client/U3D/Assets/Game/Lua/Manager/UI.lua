@@ -13,22 +13,22 @@ local uis = {}
 local baseui = require("Base.BaseUI")
 
 function UI.Register(name)
-    print_log("ui register ", name)
+    print("ui register ", name)
     local ui = {}
     uis[name] = ui
     setmetatable(ui, {__index=baseui})
     return ui
 end
 
-function UI.Open(name)
+function UI.Open(name, ...)
     local ui = uis[name]
     if ui == nil then
-        print_error(string.format("ui %s not register ", name or "nil"))
+        error(string.format("ui %s not register ", name or "nil"))
         return
     end
 
     if opened[name] ~= nil then
-        print_log(string.format("ui %s already opened", name))
+        print(string.format("ui %s already opened", name))
         return
     end
 
@@ -51,11 +51,16 @@ function UI.Open(name)
             inst=inst,
         }
     }    
+
+    ui.inst = inst
+    if ui.OnOpen then
+        ui.OnOpen(...)
+    end
 end
 
 function UI.Close(name)
     if opened[name] == nil then
-        print_log(string.format("ui %s not opened", name))
+        print(string.format("ui %s not opened", name))
         return
     end
 
@@ -71,6 +76,7 @@ function UI.IsOpen()
     return opened[name] ~= nil
 end
 
+-- update
 local Time = Time
 
 local function Update()
@@ -79,6 +85,7 @@ local function Update()
         if uiData.time2destroy <= Time.realtimeSinceStartup then
             table.insert(toRemove, name)
             GameObject.Destroy(uiData.inst)
+            uiData.inst = nil
         end
     end
 
@@ -89,6 +96,5 @@ end
 
 local UpdateBeat = UpdateBeat
 UpdateBeat:AddListener(UpdateBeat:CreateListener(Update))
-
 
 return UI

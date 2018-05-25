@@ -1,4 +1,4 @@
-print_log("!! running registerlist")
+print("!! running registerlist")
 
 require("Base.BaseClass")
 require("Base.BaseUI")

@@ -151,6 +151,11 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.SceneManagement.LoadSceneMode)),
 
         _GT(typeof(GStd.Asset.AssetManager)),
+
+        _GT(typeof(UnityEngine.UI.Button)),
+        _GT(typeof(UnityEngine.UI.Button.ButtonClickedEvent)),
+        _GT(typeof(UnityEngine.UI.Image)),
+        _GT(typeof(UnityEngine.UI.Toggle)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

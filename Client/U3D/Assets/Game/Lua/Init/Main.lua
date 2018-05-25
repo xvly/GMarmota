@@ -2,10 +2,10 @@ local game = require("Manager.Game")
 game.Enter()
 
 -- local function _TestCoroutine(arg1, arg2)
---     print_log("!! 1 2", arg1, arg2)
+--     print("!! 1 2", arg1, arg2)
 
 --     for i=1, 10 do
---         print_log(Time.time, i)
+--         print(Time.time, i)
 --         coroutine.wait(0.1)
 --     end
 

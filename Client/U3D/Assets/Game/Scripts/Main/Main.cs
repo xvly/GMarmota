@@ -91,7 +91,6 @@ public class Main : MonoBehaviour {
         LuaBinder.Bind(this.luaState);
         DelegateFactory.Init();
         LuaCoroutine.Register(this.luaState, this);
-        LuaLog.OpenLibs(this.luaState);
 
         luaState.LuaSetTop(0);
         this.luaLooper = this.gameObject.AddComponent<LuaLooper>();
@@ -114,6 +113,7 @@ public class Main : MonoBehaviour {
 
     IEnumerator StartGame()
     {
+        Debug.Log("start game");
         AssetManager.Setup();
 
         this.InitLua();

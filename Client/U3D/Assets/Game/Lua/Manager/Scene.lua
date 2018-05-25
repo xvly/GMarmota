@@ -17,7 +17,7 @@ local function OnLoadLevel()
 end
 
 local function OnLoadLevelProgress(progress)
-    print_log("!! progress ", progress)
+    print("!! progress ", progress)
 
     if loadingData.OnProgress then
         loadingData.OnProgress()
@@ -43,9 +43,10 @@ end
 local mapConfigs = {}
 
 function Scene.Change(id)
-    print_log("start chagne scene ", id)
+    print("start chagne scene ", id)
 
     local config = require("Config/Scene/"..id)
+    assert(config, "scene not found")
     mapConfigs[id] = config
 
     LoadLevel(config.ab, config.asset)
